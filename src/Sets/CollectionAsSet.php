@@ -62,19 +62,6 @@ class CollectionAsSet extends CollectionOfAnything
     // ----------------------------------------------------------------
 
     /**
-     * @param CollectionAsSet<TKey,TValue>|array<TKey,TValue> $input
-     * @return static
-     */
-    public function add(self|array $input): static
-    {
-        if (is_array($input)) {
-            return $this->mergeArray($input);
-        }
-
-        return $this->mergeSelf($input);
-    }
-
-    /**
      * @param TKey $key
      * @param TValue $value
      */
