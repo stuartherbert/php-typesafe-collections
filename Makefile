@@ -48,7 +48,7 @@ shell: ## Open a shell on the test container
 
 lint: syntax-check cs-fix phpstan ## Run all static code checks
 
-check-all: composer-validate check-code test ## Run all checks
+check-all: composer-validate lint test ## Run all checks
 
 cs: ## Run code style checks
 	docker compose run --rm test-container-85 sh -c "vendor/bin/phpcs ${OPTS}"
