@@ -38,7 +38,16 @@ jobs:
           restore-keys: php-${{ matrix.php }}
 
       - name: Install highest dependencies
-        run: composer update --no-interaction --no-progress --no-suggest
+        run: composer install
+
+      - name: Syntax check
+        run: find src -name '*.php' | xargs php -l && find tests -name '*.php' | xargs php -l
+
+      - name: Coding standards
+        run: vendor/bin/phpcs
+
+      - name: phpstan
+        run: vendor/bin/phpstan --memory-limit=-1
 
       - name: Tests
         run: vendor/bin/phpunit --testsuite=unit --display-all-issues --testdox
