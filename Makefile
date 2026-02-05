@@ -63,12 +63,11 @@ syntax-check: ## Check all PHP files for syntax errors
 	@docker compose run --rm test-container-85 find src -name '*.php' | xargs php -l
 	@docker compose run --rm test-container-85 find tests -name '*.php' | xargs php -l
 
-test: ## Run all tests
-	docker compose run --rm test-container-85 sh -c "$(XDEBUG) vendor/bin/phpunit --testsuite=unit --display-all-issues --testdox ${OPTS}"
+test: unit ## Run all tests
 
 unit: ## Run unit tests
-	docker compose run --rm test-container sh-85 -c "$(XDEBUG) vendor/bin/phpunit --testsuite=unit --display-all-issues --testdox ${OPTS}"
+	docker compose run --rm test-container-85 sh -c "$(XDEBUG) vendor/bin/phpunit --testsuite=unit --display-all-issues --testdox ${OPTS}"
 
 coverage: ## run all test and report on code coverage
-	docker compose run --rm test-container sh-85 -c "$(XDEBUG) XDEBUG_MODE=coverage vendor/bin/phpunit --testsuite=unit ${OPTS} --coverage-html testcoverage "
+	docker compose run --rm test-container-85 sh -c "$(XDEBUG) XDEBUG_MODE=coverage vendor/bin/phpunit --testsuite=unit ${OPTS} --coverage-html testcoverage "
 
