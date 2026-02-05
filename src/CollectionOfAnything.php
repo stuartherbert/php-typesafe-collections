@@ -48,6 +48,13 @@ use StuartHerbert\TypesafeCollections\Contracts\Arrayable;
  * Most of the time, you should not extend this class directly. Extend
  * CollectionAsList, CollectionAsSet, or one of their child classes.
  *
+ * NOTES:
+ *
+ * - if you add methods to this class, make sure you write unit tests
+ *   in `CollectionOfAnythingTest`
+ * - if you add methods to this class, make sure you write new unit tests
+ *   for all the child classes too
+ *
  * @template TKey of array-key
  * @template TValue of mixed
  * @template-implements IteratorAggregate<TKey, TValue>
