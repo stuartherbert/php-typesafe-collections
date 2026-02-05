@@ -50,7 +50,6 @@ use StuartHerbert\TypesafeCollections\CollectionOfAnything;
  *
  * @template TValue of mixed
  * @extends CollectionOfAnything<int, TValue>
- *
  * @method toArray() list<TValue>
  */
 class CollectionAsList extends CollectionOfAnything

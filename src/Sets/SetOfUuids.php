@@ -1,6 +1,5 @@
 <?php
 
-//
 // Copyright (c) 2026-present Stuart Herbert
 // All rights reserved.
 //
@@ -32,9 +31,9 @@
 // LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
 // ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
-//
 
 declare(strict_types=1);
+
 namespace StuartHerbert\TypesafeCollections\Sets;
 
 use Ramsey\Uuid\UuidInterface;
@@ -49,7 +48,7 @@ class SetOfUuids extends SetOfObjects
 {
     public function add(UuidInterface $input): static
     {
-        $this->data[(string)$input] = $input;
+        $this->data[(string) $input] = $input;
         return $this;
     }
 
@@ -60,13 +59,12 @@ class SetOfUuids extends SetOfObjects
     // ----------------------------------------------------------------
 
     /**
-     *
      * @return array<string,string>
      */
     public function toArrayOfStrings(): array
     {
         return array_map(
-            fn(UuidInterface $id) => (string)$id,
+            fn(UuidInterface $id) => (string) $id,
             $this->data,
         );
     }
