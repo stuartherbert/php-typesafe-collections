@@ -44,6 +44,7 @@ use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use StuartHerbert\TypesafeCollections\CollectionOfAnything;
 
+#[TestDox('CollectionOfAnything')]
 class CollectionOfAnythingTest extends TestCase
 {
     // ================================================================
