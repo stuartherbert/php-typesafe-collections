@@ -1,0 +1,36 @@
+{
+    "name": "stuartherbert/typesafe-collections",
+    "description": "Type-safe collection classes",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "autoload": {
+        "psr-4": {
+            "StuartHerbert\\TypesafeCollections\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "StuartHerbert\\TypesafeCollections\\Tests\\Unit\\": "tests/unit/src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Stuart Herbert",
+            "email": "stuart@stuartherbert.com"
+        }
+    ],
+    "require": {
+        "ramsey/uuid": "^4.9"
+    },
+    "require-dev": {
+        "laminas/laminas-coding-standard": "^3.1",
+        "phpstan/phpstan": "^2.1.38",
+        "phpunit/phpunit": "^12.5.9",
+        "roave/security-advisories": "dev-latest"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
