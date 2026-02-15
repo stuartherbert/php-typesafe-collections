@@ -37,7 +37,7 @@ declare(strict_types=1);
 namespace StuartHerbert\TypesafeCollections\Sets;
 
 /**
- * SetOfStrings holds a collection of strings.
+ * SetOfFloats holds a collection of floats.
  *
  * @template TKey of array-key
  * @template TValue of integer

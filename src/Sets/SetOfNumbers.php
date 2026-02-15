@@ -39,7 +39,7 @@ namespace StuartHerbert\TypesafeCollections\Sets;
 use StuartHerbert\TypesafeCollections\Sets\CollectionAsSet;
 
 /**
- * SetOfStrings holds a collection of strings.
+ * SetOfNumbers holds a collection of numbers.
  *
  * @template TKey of array-key
  * @template TValue of int|float
