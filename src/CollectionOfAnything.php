@@ -43,10 +43,10 @@ use RuntimeException;
 use StuartHerbert\TypesafeCollections\Contracts\Arrayable;
 
 /**
- * CollectionOfAnything is the base class for all sub-types of Lists and Sets.
+ * CollectionOfAnything is the base class for all typesafe collections.
  *
  * Most of the time, you should not extend this class directly. Extend
- * CollectionAsList, CollectionAsSet, or one of their child classes.
+ * CollectionAsList, CollectionAsDict, or one of their child classes.
  *
  * NOTES:
  *

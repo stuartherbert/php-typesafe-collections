@@ -785,7 +785,7 @@ class CollectionAsDictTest extends TestCase
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
-            'CollectionAsdict does not contain missing',
+            'CollectionAsDict does not contain missing',
         );
 
         $unit->get('missing');
@@ -810,7 +810,7 @@ class CollectionAsDictTest extends TestCase
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
-            'CollectionAsdict does not contain anything',
+            'CollectionAsDict does not contain anything',
         );
 
         $unit->get('anything');
@@ -887,7 +887,7 @@ class CollectionAsDictTest extends TestCase
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
-            'CollectionAsdict does not contain name',
+            'CollectionAsDict does not contain name',
         );
 
         $unit->get('name');
@@ -912,7 +912,7 @@ class CollectionAsDictTest extends TestCase
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
-            'CollectionAsdict does not contain my-special-key',
+            'CollectionAsDict does not contain my-special-key',
         );
 
         $unit->get('my-special-key');
@@ -1350,14 +1350,14 @@ class CollectionAsDictTest extends TestCase
         $this->assertSame($unit, $result);
     }
 
-    #[TestDox('merge() can merge another CollectionAsdict')]
+    #[TestDox('merge() can merge another CollectionAsDict')]
     public function test_merge_can_merge_collection(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that merge() can accept another
-        // CollectionAsdict and merge its contents
+        // CollectionAsDict and merge its contents
 
         // ----------------------------------------------------------------
         // dictup your test
@@ -1551,7 +1551,7 @@ class CollectionAsDictTest extends TestCase
         // explain your test
 
         // this test proves that mergeSelf() adds the contents
-        // of another CollectionAsdict into this dict
+        // of another CollectionAsDict into this dict
 
         // ----------------------------------------------------------------
         // dictup your test
@@ -1810,7 +1810,7 @@ class CollectionAsDictTest extends TestCase
         // perform the change
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('CollectionAsdict is empty');
+        $this->expectExceptionMessage('CollectionAsDict is empty');
 
         $unit->first();
     }
@@ -1955,7 +1955,7 @@ class CollectionAsDictTest extends TestCase
         // perform the change
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('CollectionAsdict is empty');
+        $this->expectExceptionMessage('CollectionAsDict is empty');
 
         $unit->last();
     }
@@ -1966,13 +1966,13 @@ class CollectionAsDictTest extends TestCase
     //
     // ----------------------------------------------------------------
 
-    #[TestDox('copy() returns a new CollectionAsdict with the same data')]
+    #[TestDox('copy() returns a new CollectionAsDict with the same data')]
     public function test_copy_returns_new_instance_with_same_data(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that copy() returns a new CollectionAsdict
+        // this test proves that copy() returns a new CollectionAsDict
         // instance containing the same data as the original
 
         // ----------------------------------------------------------------
@@ -2040,7 +2040,7 @@ class CollectionAsDictTest extends TestCase
         // explain your test
 
         // this test proves that copying an empty dict returns a new,
-        // empty CollectionAsdict instance
+        // empty CollectionAsDict instance
 
         // ----------------------------------------------------------------
         // dictup your test
@@ -2156,7 +2156,7 @@ class CollectionAsDictTest extends TestCase
         // explain your test
 
         // this test proves that getCollectionTypeAsString() returns
-        // "CollectionAsdict" (just the class name without namespace)
+        // "CollectionAsDict" (just the class name without namespace)
 
         // ----------------------------------------------------------------
         // dictup your test
@@ -2171,7 +2171,7 @@ class CollectionAsDictTest extends TestCase
         // ----------------------------------------------------------------
         // test the results
 
-        $this->assertSame('CollectionAsdict', $actualResult);
+        $this->assertSame('CollectionAsDict', $actualResult);
     }
 
     // ================================================================
