@@ -36,6 +36,7 @@ $tags->toArray();    // [0 => 'php', 1 => 'collections', 2 => 'typesafe']
 | Class | Description |
 |-------|-------------|
 | `CollectionAsList` | Base class for all lists. Extend this to create your own. |
+| `ListOfNumbers` | A list of numeric values (`int` or `float`). |
 | `ListOfStrings` | A list of string values. |
 
 ### Dictionaries
