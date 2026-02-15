@@ -42,6 +42,7 @@ $tags->toArray();    // [0 => 'php', 1 => 'collections', 2 => 'typesafe']
 | `ListOfNumbers` | A list of numeric values (`int` or `float`). |
 | `ListOfObjects` | A list of PHP objects. |
 | `ListOfStrings` | A list of string values. |
+| `ListOfUuids` | A list of `UuidInterface` values. |
 
 ### Dictionaries
 
