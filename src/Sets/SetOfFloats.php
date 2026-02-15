@@ -40,7 +40,7 @@ namespace StuartHerbert\TypesafeCollections\Sets;
  * SetOfFloats holds a collection of floats.
  *
  * @template TKey of array-key
- * @template TValue of integer
+ * @template TValue of float
  * @template-extends SetOfNumbers<TKey, TValue>
  */
 class SetOfFloats extends SetOfNumbers
