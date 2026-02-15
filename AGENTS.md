@@ -52,7 +52,8 @@ CollectionOfAnything (base class - src/CollectionOfAnything.php)
   method call passes more than one parameter
 - **Coding standard** - Uses `LaminasCodingStandard` (see phpcs.xml.dist)
 - **No naming prefixes/suffixes** - Don't use `Abstract` prefix, `Interface`
-  or `Trait` suffixes (PHPStan catches misuse)
+  or `Trait` suffixes (PHPStan catches misuse). Exception classes **must** end
+  with the `Exception` suffix (e.g. `NullValueNotAllowedException`).
 
 ### Code Patterns
 

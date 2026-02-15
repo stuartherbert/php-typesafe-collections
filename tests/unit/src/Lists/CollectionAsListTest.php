@@ -42,6 +42,7 @@ use ArrayIterator;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
+use StuartHerbert\TypesafeCollections\Exceptions\NullValueNotAllowedException;
 use StuartHerbert\TypesafeCollections\Lists\CollectionAsList;
 
 #[TestDox('CollectionAsList')]
@@ -324,29 +325,26 @@ class CollectionAsListTest extends TestCase
         $this->assertCount(3, $unit);
     }
 
-    #[TestDox('add() can add null values')]
-    public function test_add_can_add_null_values(): void
+    #[TestDox('add() rejects null values')]
+    public function test_add_rejects_null_values(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that add() can store null values in the list
+        // this test proves that add() throws a
+        // NullValueNotAllowed exception when given a null value
 
         // ----------------------------------------------------------------
         // setup your test
 
         $unit = new CollectionAsList();
 
+        $this->expectException(NullValueNotAllowedException::class);
+
         // ----------------------------------------------------------------
         // perform the change
 
         $unit->add(null);
-
-        // ----------------------------------------------------------------
-        // test the results
-
-        $this->assertSame([null], $unit->toArray());
-        $this->assertCount(1, $unit);
     }
 
     #[TestDox('add() can add values of different types')]
@@ -370,17 +368,16 @@ class CollectionAsListTest extends TestCase
         $unit->add(42);
         $unit->add(3.14);
         $unit->add(true);
-        $unit->add(null);
         $unit->add(['nested' => 'array']);
 
         // ----------------------------------------------------------------
         // test the results
 
         $this->assertSame(
-            ['a string', 42, 3.14, true, null, ['nested' => 'array']],
+            ['a string', 42, 3.14, true, ['nested' => 'array']],
             $unit->toArray(),
         );
-        $this->assertCount(6, $unit);
+        $this->assertCount(5, $unit);
     }
 
     // ================================================================

@@ -38,6 +38,7 @@ namespace StuartHerbert\TypesafeCollections\Dictionaries;
 
 use RuntimeException;
 use StuartHerbert\TypesafeCollections\CollectionOfAnything;
+use StuartHerbert\TypesafeCollections\Validators\RejectNullValue;
 
 /**
  * CollectionAsDict holds a collection of data that has identity (ie, it has
@@ -50,7 +51,7 @@ use StuartHerbert\TypesafeCollections\CollectionOfAnything;
  * no identity (ie, no primary key).
  *
  * @template TKey of array-key
- * @template TValue of mixed
+ * @template TValue of array|bool|callable|float|int|object|string
  * @extends CollectionOfAnything<TKey,TValue>
  */
 class CollectionAsDict extends CollectionOfAnything
@@ -67,6 +68,11 @@ class CollectionAsDict extends CollectionOfAnything
      */
     public function set(mixed $key, mixed $value): static
     {
+        RejectNullValue::check(
+            value: $value,
+            collectionType: $this->getCollectionTypeAsString(),
+        );
+
         $this->data[$key] = $value;
 
         return $this;

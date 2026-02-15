@@ -41,6 +41,7 @@ use Countable;
 use IteratorAggregate;
 use RuntimeException;
 use StuartHerbert\TypesafeCollections\Contracts\Arrayable;
+use StuartHerbert\TypesafeCollections\Validators\RejectNullArrayValues;
 
 /**
  * CollectionOfAnything is the base class for all typesafe collections.
@@ -50,13 +51,14 @@ use StuartHerbert\TypesafeCollections\Contracts\Arrayable;
  *
  * NOTES:
  *
+ * - you cannot store NULL values in any collection
  * - if you add methods to this class, make sure you write unit tests
  *   in `CollectionOfAnythingTest`
  * - if you add methods to this class, make sure you write new unit tests
  *   for all the child classes too
  *
  * @template TKey of array-key
- * @template TValue of mixed
+ * @template TValue of array|bool|callable|float|int|object|string
  * @template-implements IteratorAggregate<TKey, TValue>
  * @template-implements Arrayable<TKey, TValue>
  * @phpstan-consistent-constructor
@@ -69,6 +71,10 @@ class CollectionOfAnything implements Arrayable, Countable, IteratorAggregate
     public function __construct(
         protected array $data = [],
     ) {
+        RejectNullArrayValues::check(
+            data: $this->data,
+            collectionType: $this->getCollectionTypeAsString(),
+        );
     }
 
     // ================================================================
@@ -135,6 +141,11 @@ class CollectionOfAnything implements Arrayable, Countable, IteratorAggregate
      */
     public function mergeArray(array $input): static
     {
+        RejectNullArrayValues::check(
+            data: $input,
+            collectionType: $this->getCollectionTypeAsString(),
+        );
+
         $this->data = [
             ...$this->data,
             ...$input,

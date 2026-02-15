@@ -43,6 +43,7 @@ use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use StuartHerbert\TypesafeCollections\Dictionaries\CollectionAsDict;
+use StuartHerbert\TypesafeCollections\Exceptions\NullValueNotAllowedException;
 
 #[TestDox('CollectionAsDict')]
 class CollectionAsDictTest extends TestCase
@@ -519,30 +520,25 @@ class CollectionAsDictTest extends TestCase
         $this->assertTrue($actualResult);
     }
 
-    #[TestDox('has() returns false for null values (uses isdict semantics)')]
-    public function test_has_returns_false_for_null_values(): void
+    #[TestDox('Constructor rejects null values')]
+    public function test_constructor_rejects_null_values(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that has() returns false when a key
-        // exists but its value is null, because has() uses
-        // isset() internally
+        // this test proves that the constructor throws a
+        // NullValueNotAllowed exception when the initial data
+        // contains a null value
 
         // ----------------------------------------------------------------
-        // dictup your test
+        // setup your test
 
-        $unit = new CollectionAsDict(['name' => null]);
+        $this->expectException(NullValueNotAllowedException::class);
 
         // ----------------------------------------------------------------
         // perform the change
 
-        $actualResult = $unit->has('name');
-
-        // ----------------------------------------------------------------
-        // test the results
-
-        $this->assertFalse($actualResult);
+        new CollectionAsDict(['name' => null]);
     }
 
     // ================================================================
@@ -680,31 +676,6 @@ class CollectionAsDictTest extends TestCase
         $this->assertSame('alpha', $actualResult);
     }
 
-    #[TestDox('maybeGet() returns null for null values (uses isdict semantics)')]
-    public function test_maybe_get_returns_null_for_null_values(): void
-    {
-        // ----------------------------------------------------------------
-        // explain your test
-
-        // this test proves that maybeGet() returns null when a key
-        // exists but its value is null, because has() uses isset()
-        // internally
-
-        // ----------------------------------------------------------------
-        // dictup your test
-
-        $unit = new CollectionAsDict(['name' => null]);
-
-        // ----------------------------------------------------------------
-        // perform the change
-
-        $actualResult = $unit->maybeGet('name');
-
-        // ----------------------------------------------------------------
-        // test the results
-
-        $this->assertNull($actualResult);
-    }
 
     #[TestDox('maybeGet() returns the overwritten value after set()')]
     public function test_maybe_get_returns_overwritten_value(): void
@@ -865,32 +836,6 @@ class CollectionAsDictTest extends TestCase
         // test the results
 
         $this->assertSame('alpha', $actualResult);
-    }
-
-    #[TestDox('get() throws for null values (uses isdict semantics)')]
-    public function test_get_throws_for_null_values(): void
-    {
-        // ----------------------------------------------------------------
-        // explain your test
-
-        // this test proves that get() throws a RuntimeException
-        // when a key exists but its value is null, because has()
-        // uses isset() internally
-
-        // ----------------------------------------------------------------
-        // dictup your test
-
-        $unit = new CollectionAsDict(['name' => null]);
-
-        // ----------------------------------------------------------------
-        // perform the change
-
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage(
-            'CollectionAsDict does not contain name',
-        );
-
-        $unit->get('name');
     }
 
     #[TestDox('get() exception message includes the missing key')]

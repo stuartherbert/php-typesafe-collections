@@ -34,7 +34,7 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections;
+namespace StuartHerbert\TypesafeCollections\Exceptions;
 
 use Exception;
 use Throwable;

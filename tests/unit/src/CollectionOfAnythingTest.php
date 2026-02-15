@@ -43,6 +43,7 @@ use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use StuartHerbert\TypesafeCollections\CollectionOfAnything;
+use StuartHerbert\TypesafeCollections\Exceptions\NullValueNotAllowedException;
 
 #[TestDox('CollectionOfAnything')]
 class CollectionOfAnythingTest extends TestCase
@@ -1207,7 +1208,6 @@ class CollectionOfAnythingTest extends TestCase
             42,
             3.14,
             true,
-            null,
             ['nested' => 'array'],
         ];
 
@@ -1220,7 +1220,7 @@ class CollectionOfAnythingTest extends TestCase
         // test the results
 
         $this->assertSame($expectedData, $unit->toArray());
-        $this->assertCount(6, $unit);
+        $this->assertCount(5, $unit);
     }
 
     // ================================================================
@@ -1258,5 +1258,56 @@ class CollectionOfAnythingTest extends TestCase
             ['alpha', 'bravo', 'charlie', 'delta'],
             $unit->toArray(),
         );
+    }
+
+    // ================================================================
+    //
+    // Null value rejection
+    //
+    // ----------------------------------------------------------------
+
+    #[TestDox('Constructor rejects array containing null')]
+    public function test_constructor_rejects_null_in_array(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that the constructor throws a
+        // NullValueNotAllowed exception when the initial data
+        // array contains a null value
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $this->expectException(NullValueNotAllowedException::class);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        new CollectionOfAnything(['alpha', null, 'bravo']);
+    }
+
+    #[TestDox('mergeArray() rejects array containing null')]
+    public function test_merge_array_rejects_null_in_array(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that mergeArray() throws a
+        // NullValueNotAllowed exception when the input array
+        // contains a null value, and does not modify the
+        // existing collection
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new CollectionOfAnything(['alpha']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $this->expectException(NullValueNotAllowedException::class);
+
+        $unit->mergeArray(['bravo', null]);
     }
 }

@@ -34,52 +34,46 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Lists;
+namespace StuartHerbert\TypesafeCollections\Validators;
 
-use StuartHerbert\TypesafeCollections\CollectionOfAnything;
-use StuartHerbert\TypesafeCollections\Validators\RejectNullValue;
+use StuartHerbert\TypesafeCollections\Exceptions\NullValueNotAllowedException;
 
 /**
- * CollectionAsList holds a collection of data as an array with sequential
- * integer keys.
+ * RejectNullArrayValues checks that no values in an array
+ * are null.
  *
- * Use this (or one of its child classes) to hold data that has no
- * identity (ie, no primary key).
+ * Call this at the start of any method that accepts an array
+ * and should not allow null values within that array.
  *
- * Use CollectionAsDict (or one of its child classes) if your data has
- * an identity (ie, it has a primary key).
+ * Usage:
  *
- * @template TValue of array|bool|callable|float|int|object|string
- * @extends CollectionOfAnything<int, TValue>
- * @method toArray() list<TValue>
+ *     RejectNullArrayValues::check(
+ *         data: $data,
+ *         collectionType: $this
+ *             ->getCollectionTypeAsString(),
+ *     );
  */
-class CollectionAsList extends CollectionOfAnything
+class RejectNullArrayValues
 {
     // ================================================================
     //
-    // Data management
+    // Validation
     //
     // ----------------------------------------------------------------
 
     /**
-     * @param TValue $value
-     * @return CollectionAsList<TValue>
+     * @param array<array-key, mixed> $data
+     * @throws NullValueNotAllowedException
+     *     if any value in $data is null
      */
-    public function add(mixed $value): self
-    {
-        RejectNullValue::check(
-            value: $value,
-            collectionType: $this->getCollectionTypeAsString(),
-        );
-
-        $this->data[] = $value;
-
-        return $this;
+    public static function check(
+        array $data,
+        string $collectionType,
+    ): void {
+        if (in_array(null, $data, strict: true)) {
+            throw new NullValueNotAllowedException(
+                collectionType: $collectionType,
+            );
+        }
     }
-
-    // ================================================================
-    //
-    // Accessors
-    //
-    // ----------------------------------------------------------------
 }

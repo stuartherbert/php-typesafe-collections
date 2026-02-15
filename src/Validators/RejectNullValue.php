@@ -34,52 +34,44 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Lists;
+namespace StuartHerbert\TypesafeCollections\Validators;
 
-use StuartHerbert\TypesafeCollections\CollectionOfAnything;
-use StuartHerbert\TypesafeCollections\Validators\RejectNullValue;
+use StuartHerbert\TypesafeCollections\Exceptions\NullValueNotAllowedException;
 
 /**
- * CollectionAsList holds a collection of data as an array with sequential
- * integer keys.
+ * RejectNullValue checks that a single value is not null.
  *
- * Use this (or one of its child classes) to hold data that has no
- * identity (ie, no primary key).
+ * Call this at the start of any method that accepts a value
+ * of type `mixed` and should not allow null.
  *
- * Use CollectionAsDict (or one of its child classes) if your data has
- * an identity (ie, it has a primary key).
+ * Usage:
  *
- * @template TValue of array|bool|callable|float|int|object|string
- * @extends CollectionOfAnything<int, TValue>
- * @method toArray() list<TValue>
+ *     RejectNullValue::check(
+ *         value: $value,
+ *         collectionType: $this
+ *             ->getCollectionTypeAsString(),
+ *     );
  */
-class CollectionAsList extends CollectionOfAnything
+class RejectNullValue
 {
     // ================================================================
     //
-    // Data management
+    // Validation
     //
     // ----------------------------------------------------------------
 
     /**
-     * @param TValue $value
-     * @return CollectionAsList<TValue>
+     * @throws NullValueNotAllowedException
+     *     if $value is null
      */
-    public function add(mixed $value): self
-    {
-        RejectNullValue::check(
-            value: $value,
-            collectionType: $this->getCollectionTypeAsString(),
-        );
-
-        $this->data[] = $value;
-
-        return $this;
+    public static function check(
+        mixed $value,
+        string $collectionType,
+    ): void {
+        if ($value === null) {
+            throw new NullValueNotAllowedException(
+                collectionType: $collectionType,
+            );
+        }
     }
-
-    // ================================================================
-    //
-    // Accessors
-    //
-    // ----------------------------------------------------------------
 }

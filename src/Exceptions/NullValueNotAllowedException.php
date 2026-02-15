@@ -34,52 +34,29 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Lists;
-
-use StuartHerbert\TypesafeCollections\CollectionOfAnything;
-use StuartHerbert\TypesafeCollections\Validators\RejectNullValue;
+namespace StuartHerbert\TypesafeCollections\Exceptions;
 
 /**
- * CollectionAsList holds a collection of data as an array with sequential
- * integer keys.
+ * NullValueNotAllowed is thrown when a null value is passed
+ * to a collection that does not accept null values.
  *
- * Use this (or one of its child classes) to hold data that has no
- * identity (ie, no primary key).
+ * Usage:
  *
- * Use CollectionAsDict (or one of its child classes) if your data has
- * an identity (ie, it has a primary key).
- *
- * @template TValue of array|bool|callable|float|int|object|string
- * @extends CollectionOfAnything<int, TValue>
- * @method toArray() list<TValue>
+ *     throw new NullValueNotAllowed(
+ *         collectionType: 'ListOfStrings',
+ *     );
  */
-class CollectionAsList extends CollectionOfAnything
+class NullValueNotAllowedException extends Rfc9457ProblemDetailsException
 {
-    // ================================================================
-    //
-    // Data management
-    //
-    // ----------------------------------------------------------------
-
-    /**
-     * @param TValue $value
-     * @return CollectionAsList<TValue>
-     */
-    public function add(mixed $value): self
-    {
-        RejectNullValue::check(
-            value: $value,
-            collectionType: $this->getCollectionTypeAsString(),
+    public function __construct(
+        string $collectionType,
+    ) {
+        parent::__construct(
+            // we have not sorted out documentation yet!
+            type: 'https://example.com/errors/null-value-not-allowed',
+            status: 422,
+            title: $collectionType . ' does not accept null values',
+            detail: $collectionType . ' received a null value',
         );
-
-        $this->data[] = $value;
-
-        return $this;
     }
-
-    // ================================================================
-    //
-    // Accessors
-    //
-    // ----------------------------------------------------------------
 }
