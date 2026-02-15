@@ -40,6 +40,7 @@ $tags->toArray();    // [0 => 'php', 1 => 'collections', 2 => 'typesafe']
 | `ListOfFloats` | A list of `float` values. Extends `ListOfNumbers`. |
 | `ListOfIntegers` | A list of `int` values. Extends `ListOfNumbers`. |
 | `ListOfNumbers` | A list of numeric values (`int` or `float`). |
+| `ListOfObjects` | A list of PHP objects. |
 | `ListOfStrings` | A list of string values. |
 
 ### Dictionaries
