@@ -37,21 +37,20 @@ declare(strict_types=1);
 namespace StuartHerbert\TypesafeCollections\Lists;
 
 /**
- * ListOfNumbers holds a list of numeric values (int or float).
+ * ListOfFloats holds a list of float values.
  *
- * Use this to hold an ordered collection of numbers where
- * duplicates are allowed and items have no identity (no
- * primary key).
+ * Use this to hold an ordered collection of floating-point
+ * numbers where duplicates are allowed and items have no
+ * identity (no primary key).
  *
  * Usage:
  *
- *     $numbers = new ListOfNumbers([1, 2.5, 3]);
- *     $numbers->add(4.0);
- *     $numbers->add(5);
+ *     $prices = new ListOfFloats([1.99, 2.50, 3.75]);
+ *     $prices->add(4.25);
  *
- * @template TValue of int|float
- * @template-extends CollectionAsList<TValue>
+ * @template TValue of float
+ * @template-extends ListOfNumbers<TValue>
  */
-class ListOfNumbers extends CollectionAsList
+class ListOfFloats extends ListOfNumbers
 {
 }
