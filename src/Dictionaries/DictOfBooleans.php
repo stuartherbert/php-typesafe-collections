@@ -34,24 +34,16 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Sets;
-
-use Ramsey\Uuid\UuidInterface;
+namespace StuartHerbert\TypesafeCollections\Dictionaries;
 
 /**
- * SetOfUuids holds a collection of UuidInterface objects, using the
- * Uuid (as a string) as the identity (ie, the array key).
+ * DictOfBooleans holds a collection of named true|false flags.
  *
- * @extends SetOfObjects<string, UuidInterface>
+ * @template TKey of array-key
+ * @template-extends CollectionAsDict<TKey, bool>
  */
-class SetOfUuids extends SetOfObjects
+class DictOfBooleans extends CollectionAsDict
 {
-    public function add(UuidInterface $input): static
-    {
-        $this->data[(string) $input] = $input;
-        return $this;
-    }
-
     // ================================================================
     //
     // Extractors
@@ -59,13 +51,38 @@ class SetOfUuids extends SetOfObjects
     // ----------------------------------------------------------------
 
     /**
-     * @return array<string,string>
+     * is the named flag set to `true`?
+     *
+     * @param TKey $name
+     * @return bool
+     * - true if the named flag exists, and is set to `true`
+     * - false if the named flag exists, and is set to `false`
+     * - false if the named flag does not exist
      */
-    public function toArrayOfStrings(): array
+    public function isTrue(mixed $name): bool
     {
-        return array_map(
-            fn(UuidInterface $id) => (string) $id,
-            $this->data,
-        );
+        if (isset($this->data[$name])) {
+            return $this->data[$name];
+        }
+
+        return false;
+    }
+
+    /**
+     * is the named flag set to `false`?
+     *
+     * @param TKey $name
+     * @return bool
+     * - true if the named flag exists, and is set to `false`
+     * - false if the named flag exists, and is set to `true`
+     * - false if the named flag does not exist
+     */
+    public function isFalse(mixed $name): bool
+    {
+        if (isset($this->data[$name])) {
+            return ! $this->data[$name];
+        }
+
+        return false;
     }
 }

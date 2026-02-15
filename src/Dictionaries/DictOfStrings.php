@@ -34,15 +34,15 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Sets;
+namespace StuartHerbert\TypesafeCollections\Dictionaries;
 
 /**
- * SetOfIntegers holds a collection of integers.
+ * DictOfStrings holds a collection of strings.
  *
  * @template TKey of array-key
- * @template TValue of integer
- * @template-extends SetOfNumbers<TKey, TValue>
+ * @template TValue of string
+ * @template-extends CollectionAsDict<TKey, TValue>
  */
-class SetOfIntegers extends SetOfNumbers
+class DictOfStrings extends CollectionAsDict
 {
 }

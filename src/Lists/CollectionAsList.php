@@ -45,7 +45,7 @@ use StuartHerbert\TypesafeCollections\CollectionOfAnything;
  * Use this (or one of its child classes) to hold data that has no
  * identity (ie, no primary key).
  *
- * Use CollectionAsSet (or one of its child classes) if your data has
+ * Use CollectionAsDict (or one of its child classes) if your data has
  * an identity (ie, it has a primary key).
  *
  * @template TValue of mixed

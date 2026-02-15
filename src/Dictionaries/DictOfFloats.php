@@ -34,17 +34,15 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Sets;
-
-use StuartHerbert\TypesafeCollections\Sets\CollectionAsSet;
+namespace StuartHerbert\TypesafeCollections\Dictionaries;
 
 /**
- * SetOfNumbers holds a collection of numbers.
+ * DictOfFloats holds a collection of floats.
  *
  * @template TKey of array-key
- * @template TValue of int|float
- * @template-extends CollectionAsSet<TKey, TValue>
+ * @template TValue of float
+ * @template-extends DictOfNumbers<TKey, TValue>
  */
-class SetOfNumbers extends CollectionAsSet
+class DictOfFloats extends DictOfNumbers
 {
 }

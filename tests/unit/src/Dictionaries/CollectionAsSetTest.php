@@ -36,16 +36,16 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Tests\Unit\Sets;
+namespace StuartHerbert\TypesafeCollections\Tests\Unit\Dictionaries;
 
 use ArrayIterator;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use StuartHerbert\TypesafeCollections\Sets\CollectionAsSet;
+use StuartHerbert\TypesafeCollections\Dictionaries\CollectionAsDict;
 
-#[TestDox('CollectionAsSet')]
-class CollectionAsSetTest extends TestCase
+#[TestDox('CollectionAsDict')]
+class CollectionAsDictTest extends TestCase
 {
     // ================================================================
     //
@@ -53,29 +53,29 @@ class CollectionAsSetTest extends TestCase
     //
     // ----------------------------------------------------------------
 
-    #[TestDox('Can instantiate an empty set')]
-    public function test_can_instantiate_empty_set(): void
+    #[TestDox('Can instantiate an empty dictionary')]
+    public function test_can_instantiate_empty_dictionary(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that we can create a new, empty
-        // CollectionAsSet
+        // CollectionAsDict
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
         // nothing to do
 
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // test the results
 
-        $this->assertInstanceOf(CollectionAsSet::class, $unit);
+        $this->assertInstanceOf(CollectionAsDict::class, $unit);
         $this->assertCount(0, $unit);
     }
 
@@ -85,11 +85,11 @@ class CollectionAsSetTest extends TestCase
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that we can create a CollectionAsSet
+        // this test proves that we can create a CollectionAsDict
         // and seed it with an initial associative array of data
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
         $expectedData = [
             'first' => 'alpha',
@@ -100,7 +100,7 @@ class CollectionAsSetTest extends TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit = new CollectionAsSet($expectedData);
+        $unit = new CollectionAsDict($expectedData);
 
         // ----------------------------------------------------------------
         // test the results
@@ -119,7 +119,7 @@ class CollectionAsSetTest extends TestCase
         // array, the string keys are preserved
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
         $expectedData = [
             'x' => 'alpha',
@@ -130,7 +130,7 @@ class CollectionAsSetTest extends TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit = new CollectionAsSet($expectedData);
+        $unit = new CollectionAsDict($expectedData);
         $actualData = $unit->toArray();
 
         // ----------------------------------------------------------------
@@ -145,11 +145,11 @@ class CollectionAsSetTest extends TestCase
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that CollectionAsSet can also be
+        // this test proves that CollectionAsDict can also be
         // constructed with integer keys
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
         $expectedData = [
             10 => 'alpha',
@@ -160,7 +160,7 @@ class CollectionAsSetTest extends TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit = new CollectionAsSet($expectedData);
+        $unit = new CollectionAsDict($expectedData);
 
         // ----------------------------------------------------------------
         // test the results
@@ -185,9 +185,9 @@ class CollectionAsSetTest extends TestCase
         // string key
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
@@ -211,9 +211,9 @@ class CollectionAsSetTest extends TestCase
         // integer key
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
@@ -237,9 +237,9 @@ class CollectionAsSetTest extends TestCase
         // overwrites the previous value
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet(['name' => 'alpha']);
+        $unit = new CollectionAsDict(['name' => 'alpha']);
 
         // ----------------------------------------------------------------
         // perform the change
@@ -263,9 +263,9 @@ class CollectionAsSetTest extends TestCase
         // alongside data passed into the constructor
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet([
+        $unit = new CollectionAsDict([
             'first' => 'alpha',
             'second' => 'bravo',
         ]);
@@ -299,9 +299,9 @@ class CollectionAsSetTest extends TestCase
         // instance for fluent method chaining
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
@@ -321,12 +321,12 @@ class CollectionAsSetTest extends TestCase
         // explain your test
 
         // this test proves that set() calls can be chained
-        // together fluently to build up the set
+        // together fluently to build up the dict
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
@@ -355,12 +355,12 @@ class CollectionAsSetTest extends TestCase
         // explain your test
 
         // this test proves that set() can store values of different
-        // types in the same set
+        // types in the same dict
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
@@ -399,13 +399,13 @@ class CollectionAsSetTest extends TestCase
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that has() returns true when the set
+        // this test proves that has() returns true when the dict
         // contains the given string key
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet(['name' => 'alpha']);
+        $unit = new CollectionAsDict(['name' => 'alpha']);
 
         // ----------------------------------------------------------------
         // perform the change
@@ -424,13 +424,13 @@ class CollectionAsSetTest extends TestCase
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that has() returns true when the set
+        // this test proves that has() returns true when the dict
         // contains the given integer key
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet([42 => 'alpha']);
+        $unit = new CollectionAsDict([42 => 'alpha']);
 
         // ----------------------------------------------------------------
         // perform the change
@@ -449,13 +449,13 @@ class CollectionAsSetTest extends TestCase
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that has() returns false when the set
+        // this test proves that has() returns false when the dict
         // does not contain the given key
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet(['name' => 'alpha']);
+        $unit = new CollectionAsDict(['name' => 'alpha']);
 
         // ----------------------------------------------------------------
         // perform the change
@@ -468,19 +468,19 @@ class CollectionAsSetTest extends TestCase
         $this->assertFalse($actualResult);
     }
 
-    #[TestDox('has() returns false for empty set')]
+    #[TestDox('has() returns false for empty dict')]
     public function test_has_returns_false_for_empty_set(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that has() returns false when the set
+        // this test proves that has() returns false when the dict
         // is empty
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
@@ -503,9 +503,9 @@ class CollectionAsSetTest extends TestCase
         // via the set() method
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
         $unit->set(key: 'name', value: 'alpha');
 
         // ----------------------------------------------------------------
@@ -519,7 +519,7 @@ class CollectionAsSetTest extends TestCase
         $this->assertTrue($actualResult);
     }
 
-    #[TestDox('has() returns false for null values (uses isset semantics)')]
+    #[TestDox('has() returns false for null values (uses isdict semantics)')]
     public function test_has_returns_false_for_null_values(): void
     {
         // ----------------------------------------------------------------
@@ -530,9 +530,9 @@ class CollectionAsSetTest extends TestCase
         // isset() internally
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet(['name' => null]);
+        $unit = new CollectionAsDict(['name' => null]);
 
         // ----------------------------------------------------------------
         // perform the change
@@ -561,9 +561,9 @@ class CollectionAsSetTest extends TestCase
         // at the given key when it exists
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet([
+        $unit = new CollectionAsDict([
             'first' => 'alpha',
             'second' => 'bravo',
         ]);
@@ -586,12 +586,12 @@ class CollectionAsSetTest extends TestCase
         // explain your test
 
         // this test proves that maybeGet() returns null when the
-        // given key does not exist in the set
+        // given key does not exist in the dict
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet(['name' => 'alpha']);
+        $unit = new CollectionAsDict(['name' => 'alpha']);
 
         // ----------------------------------------------------------------
         // perform the change
@@ -604,19 +604,19 @@ class CollectionAsSetTest extends TestCase
         $this->assertNull($actualResult);
     }
 
-    #[TestDox('maybeGet() returns null for empty set')]
+    #[TestDox('maybeGet() returns null for empty dict')]
     public function test_maybe_get_returns_null_for_empty_set(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that maybeGet() returns null when the
-        // set is empty
+        // dict is empty
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
@@ -639,9 +639,9 @@ class CollectionAsSetTest extends TestCase
         // were stored using the set() method
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
         $unit->set(key: 'name', value: 'alpha');
 
         // ----------------------------------------------------------------
@@ -665,9 +665,9 @@ class CollectionAsSetTest extends TestCase
         // integer keys
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet([42 => 'alpha']);
+        $unit = new CollectionAsDict([42 => 'alpha']);
 
         // ----------------------------------------------------------------
         // perform the change
@@ -680,7 +680,7 @@ class CollectionAsSetTest extends TestCase
         $this->assertSame('alpha', $actualResult);
     }
 
-    #[TestDox('maybeGet() returns null for null values (uses isset semantics)')]
+    #[TestDox('maybeGet() returns null for null values (uses isdict semantics)')]
     public function test_maybe_get_returns_null_for_null_values(): void
     {
         // ----------------------------------------------------------------
@@ -691,9 +691,9 @@ class CollectionAsSetTest extends TestCase
         // internally
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet(['name' => null]);
+        $unit = new CollectionAsDict(['name' => null]);
 
         // ----------------------------------------------------------------
         // perform the change
@@ -716,9 +716,9 @@ class CollectionAsSetTest extends TestCase
         // value after a key has been overwritten with set()
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet(['name' => 'alpha']);
+        $unit = new CollectionAsDict(['name' => 'alpha']);
         $unit->set(key: 'name', value: 'bravo');
 
         // ----------------------------------------------------------------
@@ -748,9 +748,9 @@ class CollectionAsSetTest extends TestCase
         // the given key when it exists
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet([
+        $unit = new CollectionAsDict([
             'first' => 'alpha',
             'second' => 'bravo',
         ]);
@@ -773,44 +773,44 @@ class CollectionAsSetTest extends TestCase
         // explain your test
 
         // this test proves that get() throws a RuntimeException
-        // when the given key does not exist in the set
+        // when the given key does not exist in the dict
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet(['name' => 'alpha']);
+        $unit = new CollectionAsDict(['name' => 'alpha']);
 
         // ----------------------------------------------------------------
         // perform the change
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
-            'CollectionAsSet does not contain missing',
+            'CollectionAsdict does not contain missing',
         );
 
         $unit->get('missing');
     }
 
-    #[TestDox('get() throws RuntimeException for empty set')]
+    #[TestDox('get() throws RuntimeException for empty dict')]
     public function test_get_throws_for_empty_set(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that get() throws a RuntimeException
-        // when the set is empty
+        // when the dict is empty
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
-            'CollectionAsSet does not contain anything',
+            'CollectionAsdict does not contain anything',
         );
 
         $unit->get('anything');
@@ -826,9 +826,9 @@ class CollectionAsSetTest extends TestCase
         // stored using the set() method
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
         $unit->set(key: 'name', value: 'alpha');
 
         // ----------------------------------------------------------------
@@ -852,9 +852,9 @@ class CollectionAsSetTest extends TestCase
         // integer keys
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet([42 => 'alpha']);
+        $unit = new CollectionAsDict([42 => 'alpha']);
 
         // ----------------------------------------------------------------
         // perform the change
@@ -867,7 +867,7 @@ class CollectionAsSetTest extends TestCase
         $this->assertSame('alpha', $actualResult);
     }
 
-    #[TestDox('get() throws for null values (uses isset semantics)')]
+    #[TestDox('get() throws for null values (uses isdict semantics)')]
     public function test_get_throws_for_null_values(): void
     {
         // ----------------------------------------------------------------
@@ -878,16 +878,16 @@ class CollectionAsSetTest extends TestCase
         // uses isset() internally
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet(['name' => null]);
+        $unit = new CollectionAsDict(['name' => null]);
 
         // ----------------------------------------------------------------
         // perform the change
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
-            'CollectionAsSet does not contain name',
+            'CollectionAsdict does not contain name',
         );
 
         $unit->get('name');
@@ -903,16 +903,16 @@ class CollectionAsSetTest extends TestCase
         // get() includes the missing key in its message
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
-            'CollectionAsSet does not contain my-special-key',
+            'CollectionAsdict does not contain my-special-key',
         );
 
         $unit->get('my-special-key');
@@ -924,19 +924,19 @@ class CollectionAsSetTest extends TestCase
     //
     // ----------------------------------------------------------------
 
-    #[TestDox('toArray() returns empty array for empty set')]
+    #[TestDox('toArray() returns empty array for empty dict')]
     public function test_to_array_returns_empty_array_for_empty_set(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that toArray() returns an empty array
-        // when the set contains no data
+        // when the dict contains no data
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
@@ -956,17 +956,17 @@ class CollectionAsSetTest extends TestCase
         // explain your test
 
         // this test proves that toArray() returns all the data
-        // stored in the set, preserving keys
+        // stored in the dict, preserving keys
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
         $expectedData = [
             'first' => 'alpha',
             'second' => 'bravo',
             'third' => 'charlie',
         ];
-        $unit = new CollectionAsSet($expectedData);
+        $unit = new CollectionAsDict($expectedData);
 
         // ----------------------------------------------------------------
         // perform the change
@@ -989,9 +989,9 @@ class CollectionAsSetTest extends TestCase
         // added using the set() method
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
         $unit->set(key: 'first', value: 'alpha');
         $unit->set(key: 'second', value: 'bravo');
 
@@ -1015,19 +1015,19 @@ class CollectionAsSetTest extends TestCase
     //
     // ----------------------------------------------------------------
 
-    #[TestDox('count() returns 0 for empty set')]
+    #[TestDox('count() returns 0 for empty dict')]
     public function test_count_returns_zero_for_empty_set(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that count() returns 0 when the set
+        // this test proves that count() returns 0 when the dict
         // contains no data
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
@@ -1040,19 +1040,19 @@ class CollectionAsSetTest extends TestCase
         $this->assertSame(0, $actualResult);
     }
 
-    #[TestDox('count() returns number of items in set')]
+    #[TestDox('count() returns number of items in dict')]
     public function test_count_returns_number_of_items(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that count() returns the correct number
-        // of items stored in the set
+        // of items stored in the dict
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet([
+        $unit = new CollectionAsDict([
             'first' => 'alpha',
             'second' => 'bravo',
             'third' => 'charlie',
@@ -1075,13 +1075,13 @@ class CollectionAsSetTest extends TestCase
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that the set works with PHP's built-in
+        // this test proves that the dict works with PHP's built-in
         // count() function via the Countable interface
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet([
+        $unit = new CollectionAsDict([
             'first' => 'alpha',
             'second' => 'bravo',
             'third' => 'charlie',
@@ -1108,9 +1108,9 @@ class CollectionAsSetTest extends TestCase
         // added via the set() method
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
         $unit->set(key: 'first', value: 'alpha');
         $unit->set(key: 'second', value: 'bravo');
 
@@ -1135,9 +1135,9 @@ class CollectionAsSetTest extends TestCase
         // set() does not increase the count
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet(['name' => 'alpha']);
+        $unit = new CollectionAsDict(['name' => 'alpha']);
 
         // ----------------------------------------------------------------
         // perform the change
@@ -1166,9 +1166,9 @@ class CollectionAsSetTest extends TestCase
         // ArrayIterator instance
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet([
+        $unit = new CollectionAsDict([
             'first' => 'alpha',
             'second' => 'bravo',
         ]);
@@ -1184,24 +1184,24 @@ class CollectionAsSetTest extends TestCase
         $this->assertInstanceOf(ArrayIterator::class, $actualResult);
     }
 
-    #[TestDox('Set can be iterated with foreach')]
+    #[TestDox('dict can be iterated with foreach')]
     public function test_can_iterate_with_foreach(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that the set can be used in a foreach
+        // this test proves that the dict can be used in a foreach
         // loop via the IteratorAggregate interface
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
         $expectedData = [
             'first' => 'alpha',
             'second' => 'bravo',
             'third' => 'charlie',
         ];
-        $unit = new CollectionAsSet($expectedData);
+        $unit = new CollectionAsDict($expectedData);
         $actualData = [];
 
         // ----------------------------------------------------------------
@@ -1217,19 +1217,19 @@ class CollectionAsSetTest extends TestCase
         $this->assertSame($expectedData, $actualData);
     }
 
-    #[TestDox('Iterating empty set produces no iterations')]
+    #[TestDox('Iterating empty dict produces no iterations')]
     public function test_iterating_empty_set_produces_no_iterations(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that iterating over an empty set does
+        // this test proves that iterating over an empty dict does
         // not execute the loop body
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
         $iterationCount = 0;
 
         // ----------------------------------------------------------------
@@ -1251,13 +1251,13 @@ class CollectionAsSetTest extends TestCase
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that iterating over a set preserves
+        // this test proves that iterating over a dict preserves
         // the string keys
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet([
+        $unit = new CollectionAsDict([
             'first' => 'alpha',
             'second' => 'bravo',
             'third' => 'charlie',
@@ -1283,13 +1283,13 @@ class CollectionAsSetTest extends TestCase
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that iterating over a set includes
+        // this test proves that iterating over a dict includes
         // items that were added via the set() method
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
         $unit->set(key: 'first', value: 'alpha');
         $unit->set(key: 'second', value: 'bravo');
         $actualData = [];
@@ -1316,19 +1316,19 @@ class CollectionAsSetTest extends TestCase
     //
     // ----------------------------------------------------------------
 
-    #[TestDox('merge() can merge an array into the set')]
+    #[TestDox('merge() can merge an array into the dict')]
     public function test_merge_can_merge_array(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that merge() can accept a plain PHP
-        // array and merge its contents into the set
+        // array and merge its contents into the dict
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet(['first' => 'alpha']);
+        $unit = new CollectionAsDict(['first' => 'alpha']);
         $toMerge = ['second' => 'bravo', 'third' => 'charlie'];
 
         // ----------------------------------------------------------------
@@ -1350,20 +1350,20 @@ class CollectionAsSetTest extends TestCase
         $this->assertSame($unit, $result);
     }
 
-    #[TestDox('merge() can merge another CollectionAsSet')]
+    #[TestDox('merge() can merge another CollectionAsdict')]
     public function test_merge_can_merge_collection(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that merge() can accept another
-        // CollectionAsSet and merge its contents
+        // CollectionAsdict and merge its contents
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet(['first' => 'alpha']);
-        $other = new CollectionAsSet([
+        $unit = new CollectionAsDict(['first' => 'alpha']);
+        $other = new CollectionAsDict([
             'second' => 'bravo',
             'third' => 'charlie',
         ]);
@@ -1393,19 +1393,19 @@ class CollectionAsSetTest extends TestCase
     //
     // ----------------------------------------------------------------
 
-    #[TestDox('mergeArray() adds array items to the set')]
+    #[TestDox('mergeArray() adds array items to the dict')]
     public function test_merge_array_adds_items(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that mergeArray() adds the given array's
-        // key-value pairs to the set
+        // key-value pairs to the dict
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet(['first' => 'alpha']);
+        $unit = new CollectionAsDict(['first' => 'alpha']);
         $toMerge = ['second' => 'bravo', 'third' => 'charlie'];
 
         // ----------------------------------------------------------------
@@ -1427,19 +1427,19 @@ class CollectionAsSetTest extends TestCase
         $this->assertSame($unit, $result);
     }
 
-    #[TestDox('mergeArray() into empty set sets the data')]
+    #[TestDox('mergeArray() into empty dict dicts the data')]
     public function test_merge_array_into_empty_set(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that mergeArray() works correctly when
-        // the set is initially empty
+        // the dict is initially empty
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
         $toMerge = ['first' => 'alpha', 'second' => 'bravo'];
 
         // ----------------------------------------------------------------
@@ -1456,20 +1456,20 @@ class CollectionAsSetTest extends TestCase
         );
     }
 
-    #[TestDox('mergeArray() with empty array leaves set unchanged')]
+    #[TestDox('mergeArray() with empty array leaves dict unchanged')]
     public function test_merge_array_with_empty_array(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that merging an empty array does not
-        // alter the set's existing data
+        // alter the dict's existing data
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
         $expectedData = ['first' => 'alpha', 'second' => 'bravo'];
-        $unit = new CollectionAsSet($expectedData);
+        $unit = new CollectionAsDict($expectedData);
 
         // ----------------------------------------------------------------
         // perform the change
@@ -1492,9 +1492,9 @@ class CollectionAsSetTest extends TestCase
         // string keys, the merged values overwrite the originals
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet([
+        $unit = new CollectionAsDict([
             'name' => 'alpha',
             'value' => 100,
         ]);
@@ -1519,13 +1519,13 @@ class CollectionAsSetTest extends TestCase
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that mergeArray() returns the same set
+        // this test proves that mergeArray() returns the same dict
         // instance for fluent method chaining
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet(['first' => 'alpha']);
+        $unit = new CollectionAsDict(['first' => 'alpha']);
 
         // ----------------------------------------------------------------
         // perform the change
@@ -1544,20 +1544,20 @@ class CollectionAsSetTest extends TestCase
     //
     // ----------------------------------------------------------------
 
-    #[TestDox('mergeSelf() merges another set into this one')]
+    #[TestDox('mergeSelf() merges another dict into this one')]
     public function test_merge_self_merges_set(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that mergeSelf() adds the contents
-        // of another CollectionAsSet into this set
+        // of another CollectionAsdict into this dict
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet(['first' => 'alpha']);
-        $other = new CollectionAsSet([
+        $unit = new CollectionAsDict(['first' => 'alpha']);
+        $other = new CollectionAsDict([
             'second' => 'bravo',
             'third' => 'charlie',
         ]);
@@ -1581,20 +1581,20 @@ class CollectionAsSetTest extends TestCase
         $this->assertSame($unit, $result);
     }
 
-    #[TestDox('mergeSelf() does not modify the source set')]
+    #[TestDox('mergeSelf() does not modify the source dict')]
     public function test_merge_self_does_not_modify_source(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that the set being merged from is not
+        // this test proves that the dict being merged from is not
         // modified by the merge operation
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet(['first' => 'alpha']);
-        $other = new CollectionAsSet(['second' => 'bravo']);
+        $unit = new CollectionAsDict(['first' => 'alpha']);
+        $other = new CollectionAsDict(['second' => 'bravo']);
         $expectedOtherData = ['second' => 'bravo'];
 
         // ----------------------------------------------------------------
@@ -1608,21 +1608,21 @@ class CollectionAsSetTest extends TestCase
         $this->assertSame($expectedOtherData, $other->toArray());
     }
 
-    #[TestDox('mergeSelf() with empty source leaves set unchanged')]
+    #[TestDox('mergeSelf() with empty source leaves dict unchanged')]
     public function test_merge_self_with_empty_source(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that merging an empty set does not
+        // this test proves that merging an empty dict does not
         // alter the existing data
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
         $expectedData = ['first' => 'alpha', 'second' => 'bravo'];
-        $unit = new CollectionAsSet($expectedData);
-        $other = new CollectionAsSet();
+        $unit = new CollectionAsDict($expectedData);
+        $other = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
@@ -1641,17 +1641,17 @@ class CollectionAsSetTest extends TestCase
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that when merging a set with matching
+        // this test proves that when merging a dict with matching
         // keys, the merged values overwrite the originals
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet([
+        $unit = new CollectionAsDict([
             'name' => 'alpha',
             'value' => 100,
         ]);
-        $other = new CollectionAsSet([
+        $other = new CollectionAsDict([
             'value' => 200,
             'extra' => 'new',
         ]);
@@ -1683,12 +1683,12 @@ class CollectionAsSetTest extends TestCase
         // explain your test
 
         // this test proves that maybeFirst() returns the value of
-        // the first key in the set
+        // the first key in the dict
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet([
+        $unit = new CollectionAsDict([
             'first' => 'alpha',
             'second' => 'bravo',
             'third' => 'charlie',
@@ -1705,19 +1705,19 @@ class CollectionAsSetTest extends TestCase
         $this->assertSame('alpha', $actualResult);
     }
 
-    #[TestDox('maybeFirst() returns null for empty set')]
+    #[TestDox('maybeFirst() returns null for empty dict')]
     public function test_maybe_first_returns_null_for_empty_set(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that maybeFirst() returns null when the
-        // set is empty, rather than throwing an exception
+        // dict is empty, rather than throwing an exception
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
@@ -1740,9 +1740,9 @@ class CollectionAsSetTest extends TestCase
         // item that was added via the set() method
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
         $unit->set(key: 'first', value: 'alpha');
         $unit->set(key: 'second', value: 'bravo');
 
@@ -1770,12 +1770,12 @@ class CollectionAsSetTest extends TestCase
         // explain your test
 
         // this test proves that first() returns the value of the
-        // first key in the set when it is not empty
+        // first key in the dict when it is not empty
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet([
+        $unit = new CollectionAsDict([
             'first' => 'alpha',
             'second' => 'bravo',
             'third' => 'charlie',
@@ -1792,25 +1792,25 @@ class CollectionAsSetTest extends TestCase
         $this->assertSame('alpha', $actualResult);
     }
 
-    #[TestDox('first() throws RuntimeException for empty set')]
+    #[TestDox('first() throws RuntimeException for empty dict')]
     public function test_first_throws_for_empty_set(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that first() throws a RuntimeException
-        // when the set is empty
+        // when the dict is empty
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('CollectionAsSet is empty');
+        $this->expectExceptionMessage('CollectionAsdict is empty');
 
         $unit->first();
     }
@@ -1828,12 +1828,12 @@ class CollectionAsSetTest extends TestCase
         // explain your test
 
         // this test proves that maybeLast() returns the value of
-        // the last key in the set
+        // the last key in the dict
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet([
+        $unit = new CollectionAsDict([
             'first' => 'alpha',
             'second' => 'bravo',
             'third' => 'charlie',
@@ -1850,19 +1850,19 @@ class CollectionAsSetTest extends TestCase
         $this->assertSame('charlie', $actualResult);
     }
 
-    #[TestDox('maybeLast() returns null for empty set')]
+    #[TestDox('maybeLast() returns null for empty dict')]
     public function test_maybe_last_returns_null_for_empty_set(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that maybeLast() returns null when the
-        // set is empty, rather than throwing an exception
+        // dict is empty, rather than throwing an exception
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
@@ -1885,9 +1885,9 @@ class CollectionAsSetTest extends TestCase
         // recently added item via set()
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
         $unit->set(key: 'first', value: 'alpha');
         $unit->set(key: 'second', value: 'bravo');
 
@@ -1915,12 +1915,12 @@ class CollectionAsSetTest extends TestCase
         // explain your test
 
         // this test proves that last() returns the value of the
-        // last key in the set when it is not empty
+        // last key in the dict when it is not empty
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet([
+        $unit = new CollectionAsDict([
             'first' => 'alpha',
             'second' => 'bravo',
             'third' => 'charlie',
@@ -1937,25 +1937,25 @@ class CollectionAsSetTest extends TestCase
         $this->assertSame('charlie', $actualResult);
     }
 
-    #[TestDox('last() throws RuntimeException for empty set')]
+    #[TestDox('last() throws RuntimeException for empty dict')]
     public function test_last_throws_for_empty_set(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that last() throws a RuntimeException
-        // when the set is empty
+        // when the dict is empty
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('CollectionAsSet is empty');
+        $this->expectExceptionMessage('CollectionAsdict is empty');
 
         $unit->last();
     }
@@ -1966,24 +1966,24 @@ class CollectionAsSetTest extends TestCase
     //
     // ----------------------------------------------------------------
 
-    #[TestDox('copy() returns a new CollectionAsSet with the same data')]
+    #[TestDox('copy() returns a new CollectionAsdict with the same data')]
     public function test_copy_returns_new_instance_with_same_data(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that copy() returns a new CollectionAsSet
+        // this test proves that copy() returns a new CollectionAsdict
         // instance containing the same data as the original
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
         $expectedData = [
             'first' => 'alpha',
             'second' => 'bravo',
             'third' => 'charlie',
         ];
-        $unit = new CollectionAsSet($expectedData);
+        $unit = new CollectionAsDict($expectedData);
 
         // ----------------------------------------------------------------
         // perform the change
@@ -1993,7 +1993,7 @@ class CollectionAsSetTest extends TestCase
         // ----------------------------------------------------------------
         // test the results
 
-        $this->assertInstanceOf(CollectionAsSet::class, $copy);
+        $this->assertInstanceOf(CollectionAsDict::class, $copy);
         $this->assertNotSame($unit, $copy);
         $this->assertSame($expectedData, $copy->toArray());
     }
@@ -2004,14 +2004,14 @@ class CollectionAsSetTest extends TestCase
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that modifying the copied set does not
-        // affect the original set's data
+        // this test proves that modifying the copied dict does not
+        // affect the original dict's data
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
         $originalData = ['first' => 'alpha', 'second' => 'bravo'];
-        $unit = new CollectionAsSet($originalData);
+        $unit = new CollectionAsDict($originalData);
 
         // ----------------------------------------------------------------
         // perform the change
@@ -2033,19 +2033,19 @@ class CollectionAsSetTest extends TestCase
         );
     }
 
-    #[TestDox('copy() of empty set returns empty set')]
+    #[TestDox('copy() of empty dict returns empty dict')]
     public function test_copy_of_empty_set(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that copying an empty set returns a new,
-        // empty CollectionAsSet instance
+        // this test proves that copying an empty dict returns a new,
+        // empty CollectionAsdict instance
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
@@ -2055,7 +2055,7 @@ class CollectionAsSetTest extends TestCase
         // ----------------------------------------------------------------
         // test the results
 
-        $this->assertInstanceOf(CollectionAsSet::class, $copy);
+        $this->assertInstanceOf(CollectionAsDict::class, $copy);
         $this->assertNotSame($unit, $copy);
         $this->assertSame([], $copy->toArray());
         $this->assertCount(0, $copy);
@@ -2067,19 +2067,19 @@ class CollectionAsSetTest extends TestCase
     //
     // ----------------------------------------------------------------
 
-    #[TestDox('empty() returns true for empty set')]
+    #[TestDox('empty() returns true for empty dict')]
     public function test_empty_returns_true_for_empty_set(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that empty() returns true when the
-        // set has no data
+        // dict has no data
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
@@ -2092,19 +2092,19 @@ class CollectionAsSetTest extends TestCase
         $this->assertTrue($actualResult);
     }
 
-    #[TestDox('empty() returns false for non-empty set')]
+    #[TestDox('empty() returns false for non-empty dict')]
     public function test_empty_returns_false_for_non_empty_set(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that empty() returns false when the
-        // set contains data
+        // dict contains data
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet(['name' => 'alpha']);
+        $unit = new CollectionAsDict(['name' => 'alpha']);
 
         // ----------------------------------------------------------------
         // perform the change
@@ -2127,9 +2127,9 @@ class CollectionAsSetTest extends TestCase
         // has been added via set()
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
         $unit->set(key: 'name', value: 'alpha');
 
         // ----------------------------------------------------------------
@@ -2156,12 +2156,12 @@ class CollectionAsSetTest extends TestCase
         // explain your test
 
         // this test proves that getCollectionTypeAsString() returns
-        // "CollectionAsSet" (just the class name without namespace)
+        // "CollectionAsdict" (just the class name without namespace)
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
+        $unit = new CollectionAsDict();
 
         // ----------------------------------------------------------------
         // perform the change
@@ -2171,28 +2171,28 @@ class CollectionAsSetTest extends TestCase
         // ----------------------------------------------------------------
         // test the results
 
-        $this->assertSame('CollectionAsSet', $actualResult);
+        $this->assertSame('CollectionAsdict', $actualResult);
     }
 
     // ================================================================
     //
-    // Single-item sets
+    // Single-item dicts
     //
     // ----------------------------------------------------------------
 
-    #[TestDox('Set with one item: first() and last() return the same value')]
+    #[TestDox('dict with one item: first() and last() return the same value')]
     public function test_single_item_first_and_last_are_same(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that for a set with exactly one item,
+        // this test proves that for a dict with exactly one item,
         // both first() and last() return that same item
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet(['only' => 'item']);
+        $unit = new CollectionAsDict(['only' => 'item']);
 
         // ----------------------------------------------------------------
         // perform the change
@@ -2223,10 +2223,10 @@ class CollectionAsSetTest extends TestCase
         // chained together fluently
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet();
-        $other = new CollectionAsSet(['fourth' => 'delta']);
+        $unit = new CollectionAsDict();
+        $other = new CollectionAsDict(['fourth' => 'delta']);
 
         // ----------------------------------------------------------------
         // perform the change
@@ -2268,9 +2268,9 @@ class CollectionAsSetTest extends TestCase
         // same value when the key exists and is not null
 
         // ----------------------------------------------------------------
-        // setup your test
+        // dictup your test
 
-        $unit = new CollectionAsSet([
+        $unit = new CollectionAsDict([
             'first' => 'alpha',
             'second' => 'bravo',
         ]);

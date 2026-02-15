@@ -34,20 +34,15 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Sets;
+namespace StuartHerbert\TypesafeCollections\Dictionaries;
 
 /**
- * SetOfObjects holds a collection of objects that have identity (ie, they
- * have a primary key or equivalent of some kind).
- *
- * Create your own child classes to create type-safe collections of your
- * app / package's objects.
+ * DictOfNumbers holds a collection of numbers.
  *
  * @template TKey of array-key
- * @template TValue of object
- * @extends CollectionAsSet<TKey, TValue>
- * @phpstan-consistent-constructor
+ * @template TValue of int|float
+ * @template-extends CollectionAsDict<TKey, TValue>
  */
-class SetOfObjects extends CollectionAsSet
+class DictOfNumbers extends CollectionAsDict
 {
 }

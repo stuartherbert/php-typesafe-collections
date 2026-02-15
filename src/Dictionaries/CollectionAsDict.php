@@ -34,36 +34,87 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Sets;
+namespace StuartHerbert\TypesafeCollections\Dictionaries;
 
-use StuartHerbert\TypesafeCollections\Contracts\EntityWithStringId;
+use RuntimeException;
+use StuartHerbert\TypesafeCollections\CollectionOfAnything;
 
 /**
- * SetOfEntitiesWithStringId holds a collection of objects that implement
- * the EntityWithStringId interface, using the Entity's ID as the collection's
- * array key.
+ * CollectionAsDict holds a collection of data that has identity (ie, it has
+ * a primary key of some kind).
  *
- * @extends SetOfObjects<string, EntityWithStringId>
+ * Extend this class to create stronger-typed collections for your specific
+ * classes.
+ *
+ * Use CollectionAsList (or one of its child classes) to hold data that has
+ * no identity (ie, no primary key).
+ *
+ * @template TKey of array-key
+ * @template TValue of mixed
+ * @extends CollectionOfAnything<TKey,TValue>
  */
-class SetOfEntitiesWithStringIds extends SetOfObjects
+class CollectionAsDict extends CollectionOfAnything
 {
-    public function add(EntityWithStringId $input): static
+    // ================================================================
+    //
+    // Data Management
+    //
+    // ----------------------------------------------------------------
+
+    /**
+     * @param TKey $key
+     * @param TValue $value
+     */
+    public function set(mixed $key, mixed $value): static
     {
-        $this->data[(string) $input->getId()] = $input;
+        $this->data[$key] = $value;
+
         return $this;
     }
 
     // ================================================================
     //
-    // Extractors
+    // Accessors
     //
     // ----------------------------------------------------------------
 
     /**
-     * @return array<string>
+     * @param TKey $key
+     * @return TValue|null
      */
-    public function getIds(): array
+    public function maybeGet($key): mixed
     {
-        return array_keys($this->data);
+        if ($this->has($key)) {
+            return $this->data[$key];
+        }
+
+        return null;
+    }
+
+    /**
+     * @param TKey $key
+     * @return TValue
+     */
+    public function get($key): mixed
+    {
+        if ($this->has($key)) {
+            return $this->data[$key];
+        }
+
+        throw new RuntimeException($this->getCollectionTypeAsString() . ' does not contain ' . $key);
+    }
+
+    // ================================================================
+    //
+    // Testers
+    //
+    // ----------------------------------------------------------------
+
+    /**
+     * @param TKey $key
+     */
+    public function has($key): bool
+    {
+        return isset($this->data[$key]);
     }
 }

@@ -34,48 +34,20 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Sets;
-
-use Ramsey\Uuid\UuidInterface;
-use StuartHerbert\TypesafeCollections\Contracts\EntityWithUuid;
+namespace StuartHerbert\TypesafeCollections\Dictionaries;
 
 /**
- * SetOfEntitiesWithUuids holds a collection of objects that implement the
- * EntityWithUuid interface, using the Entity's Uuid (as a string) as the
- * identity (ie, the array key).
+ * DictOfObjects holds a collection of objects that have identity (ie, they
+ * have a primary key or equivalent of some kind).
  *
- * @extends SetOfObjects<string, EntityWithUuid>
+ * Create your own child classes to create type-safe collections of your
+ * app / package's objects.
+ *
+ * @template TKey of array-key
+ * @template TValue of object
+ * @extends CollectionAsDict<TKey, TValue>
+ * @phpstan-consistent-constructor
  */
-class SetOfEntitiesWithUuids extends SetOfObjects
+class DictOfObjects extends CollectionAsDict
 {
-    public function add(EntityWithUuid $input): static
-    {
-        $this->data[(string) $input->getId()] = $input;
-        return $this;
-    }
-
-    // ================================================================
-    //
-    // Extractors
-    //
-    // ----------------------------------------------------------------
-
-    /**
-     * @return array<UuidInterface>
-     */
-    public function getIds(): array
-    {
-        return array_map(
-            fn(EntityWithUuid $entity) => $entity->getId(),
-            $this->data,
-        );
-    }
-
-    /**
-     * @return array<string>
-     */
-    public function getIdsAsStrings(): array
-    {
-        return array_keys($this->data);
-    }
 }

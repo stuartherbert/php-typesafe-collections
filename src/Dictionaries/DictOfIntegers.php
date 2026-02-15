@@ -34,55 +34,15 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Sets;
+namespace StuartHerbert\TypesafeCollections\Dictionaries;
 
 /**
- * SetOfBooleans holds a collection of named true|false flags.
+ * DictOfIntegers holds a collection of integers.
  *
  * @template TKey of array-key
- * @template-extends CollectionAsSet<TKey, bool>
+ * @template TValue of integer
+ * @template-extends DictOfNumbers<TKey, TValue>
  */
-class SetOfBooleans extends CollectionAsSet
+class DictOfIntegers extends DictOfNumbers
 {
-    // ================================================================
-    //
-    // Extractors
-    //
-    // ----------------------------------------------------------------
-
-    /**
-     * is the named flag set to `true`?
-     *
-     * @param TKey $name
-     * @return bool
-     * - true if the named flag exists, and is set to `true`
-     * - false if the named flag exists, and is set to `false`
-     * - false if the named flag does not exist
-     */
-    public function isTrue(mixed $name): bool
-    {
-        if (isset($this->data[$name])) {
-            return $this->data[$name];
-        }
-
-        return false;
-    }
-
-    /**
-     * is the named flag set to `false`?
-     *
-     * @param TKey $name
-     * @return bool
-     * - true if the named flag exists, and is set to `false`
-     * - false if the named flag exists, and is set to `true`
-     * - false if the named flag does not exist
-     */
-    public function isFalse(mixed $name): bool
-    {
-        if (isset($this->data[$name])) {
-            return ! $this->data[$name];
-        }
-
-        return false;
-    }
 }

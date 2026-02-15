@@ -34,15 +34,38 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Sets;
+namespace StuartHerbert\TypesafeCollections\Dictionaries;
+
+use Ramsey\Uuid\UuidInterface;
 
 /**
- * SetOfFloats holds a collection of floats.
+ * DictOfUuids holds a collection of UuidInterface objects, using the
+ * Uuid (as a string) as the identity (ie, the array key).
  *
- * @template TKey of array-key
- * @template TValue of float
- * @template-extends SetOfNumbers<TKey, TValue>
+ * @extends DictOfObjects<string, UuidInterface>
  */
-class SetOfFloats extends SetOfNumbers
+class DictOfUuids extends DictOfObjects
 {
+    public function add(string $key, UuidInterface $input): static
+    {
+        $this->data[$key] = $input;
+        return $this;
+    }
+
+    // ================================================================
+    //
+    // Extractors
+    //
+    // ----------------------------------------------------------------
+
+    /**
+     * @return array<string,string>
+     */
+    public function toArrayOfStrings(): array
+    {
+        return array_map(
+            fn(UuidInterface $id) => (string) $id,
+            $this->data,
+        );
+    }
 }
