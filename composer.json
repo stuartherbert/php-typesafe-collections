@@ -10,7 +10,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "StuartHerbert\\TypesafeCollections\\Tests\\Unit\\": "tests/unit/src"
+            "StuartHerbert\\TypesafeCollections\\Tests\\Unit\\": "tests/unit/src",
+            "StuartHerbert\\TypesafeCollections\\Tests\\Fixtures\\": "tests/unit/fixtures"
         }
     },
     "authors": [
