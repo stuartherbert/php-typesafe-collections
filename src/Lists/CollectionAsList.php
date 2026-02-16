@@ -63,9 +63,8 @@ class CollectionAsList extends CollectionOfAnything
 
     /**
      * @param TValue $value
-     * @return CollectionAsList<TValue>
      */
-    public function add(mixed $value): self
+    public function add(mixed $value): static
     {
         RejectNullValue::check(
             value: $value,
