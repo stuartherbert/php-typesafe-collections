@@ -1768,6 +1768,341 @@ alpha", "bravo	", "charlie
 
     // ================================================================
     //
+    // ltrim()
+    //
+    // ----------------------------------------------------------------
+
+    #[TestDox('ltrim() removes leading whitespace from strings')]
+    public function test_ltrim_removes_leading_whitespace(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that ltrim() removes leading whitespace
+        // from all strings in the list, while preserving trailing
+        // whitespace
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['  alpha  ', '  bravo  ', '  charlie  ']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->ltrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['alpha  ', 'bravo  ', 'charlie  '],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('ltrim() preserves trailing whitespace')]
+    public function test_ltrim_preserves_trailing_whitespace(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that ltrim() only removes leading
+        // whitespace and does not affect trailing whitespace
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['alpha  ', 'bravo  ']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->ltrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['alpha  ', 'bravo  '],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('ltrim() on list with no leading spaces leaves strings unchanged')]
+    public function test_ltrim_unchanged_when_no_leading_spaces(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that ltrim() does not alter strings that
+        // don't have leading whitespace
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $expectedData = ['alpha', 'bravo', 'charlie'];
+        $unit = new ListOfStrings($expectedData);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->ltrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($expectedData, $unit->toArray());
+    }
+
+    #[TestDox('ltrim() handles empty list')]
+    public function test_ltrim_on_empty_list(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that ltrim() works correctly on empty
+        // lists
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings();
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->ltrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame([], $unit->toArray());
+        $this->assertCount(0, $unit);
+    }
+
+    #[TestDox('ltrim() handles strings with leading newlines and tabs')]
+    public function test_ltrim_removes_leading_newlines_and_tabs(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that ltrim() removes leading newline and
+        // tab characters
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings([
+            "\nalpha",
+            "\tbravo",
+            "\n\tcharlie",
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->ltrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['alpha', 'bravo', 'charlie'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('ltrim() handles empty strings')]
+    public function test_ltrim_preserves_empty_strings(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that ltrim() correctly handles empty
+        // strings
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $expectedData = ['', 'alpha', '', 'bravo', ''];
+        $unit = new ListOfStrings($expectedData);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->ltrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($expectedData, $unit->toArray());
+    }
+
+    #[TestDox('ltrim() returns $this for method chaining')]
+    public function test_ltrim_supports_method_chaining(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that ltrim() returns $this for fluent
+        // method chaining
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['  alpha  ', '  bravo  ']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $result = $unit->ltrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($unit, $result);
+    }
+
+    #[TestDox('ltrim() can be used fluently with add()')]
+    public function test_ltrim_with_add(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that ltrim() works correctly with strings
+        // added dynamically via add()
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['  alpha  ']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->add('  bravo  ')->ltrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['alpha  ', 'bravo  '],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('ltrim() with custom characters strips only those characters from the left')]
+    public function test_ltrim_with_custom_characters(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that when a custom $characters parameter
+        // is provided, ltrim() only strips those specified characters
+        // from the left side of the strings
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['/path/', '//double//', '/single']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->ltrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['path/', 'double//', 'single'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('ltrim() with custom characters does not strip whitespace')]
+    public function test_ltrim_with_custom_characters_preserves_whitespace(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that when custom characters are provided,
+        // default whitespace is not stripped — only the specified
+        // characters are removed from the left
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['/ path /', '/ hello /']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->ltrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            [' path /', ' hello /'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('ltrim() with custom characters handles empty list')]
+    public function test_ltrim_with_custom_characters_on_empty_list(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that ltrim() with custom characters works
+        // correctly on an empty list without error
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings();
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->ltrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame([], $unit->toArray());
+        $this->assertCount(0, $unit);
+    }
+
+    #[TestDox('ltrim() with custom characters returns $this for chaining')]
+    public function test_ltrim_with_custom_characters_returns_this(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that ltrim() returns $this for fluent
+        // method chaining when custom characters are provided
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['/path/', '/other/']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $result = $unit->ltrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($unit, $result);
+    }
+
+    // ================================================================
+    //
     // getCollectionTypeAsString()
     //
     // -----------------------------------------------------------------------

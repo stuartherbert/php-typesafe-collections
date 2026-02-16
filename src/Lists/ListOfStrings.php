@@ -63,4 +63,20 @@ class ListOfStrings extends CollectionAsList
 
         return $this;
     }
+
+    /**
+     * Left-trims all strings in the list using PHP's ltrim()
+     * function.
+     *
+     * @return static
+     */
+    public function ltrim(string $characters = " \n\r\t\v\0"): static
+    {
+        $this->data = array_map(
+            fn(string $value) => ltrim($value, $characters),
+            $this->data,
+        );
+
+        return $this;
+    }
 }
