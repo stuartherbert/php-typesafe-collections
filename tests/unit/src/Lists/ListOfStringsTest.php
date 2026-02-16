@@ -1469,18 +1469,18 @@ class ListOfStringsTest extends TestCase
 
     // ================================================================
     //
-    // trim()
+    // applyTrim()
     //
     // ----------------------------------------------------------------
 
-    #[TestDox('trim() removes whitespace from strings in the list')]
-    public function test_trim_removes_whitespace_from_strings(): void
+    #[TestDox('applyTrim() removes whitespace from strings in the list')]
+    public function test_apply_trim_removes_whitespace_from_strings(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that trim() uses PHP's trim() function
-        // to remove whitespace from all strings in the list
+        // this test proves that applyTrim() uses PHP's trim()
+        // function to remove whitespace from all strings in the list
 
         // ----------------------------------------------------------------
         // setup your test
@@ -1492,7 +1492,7 @@ class ListOfStringsTest extends TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->trim();
+        $unit->applyTrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -1500,14 +1500,14 @@ class ListOfStringsTest extends TestCase
         $this->assertSame($expectedTrimmed, $unit->toArray());
     }
 
-    #[TestDox('trim() on list with no spaces leaves strings unchanged')]
-    public function test_trim_unchanged_when_no_spaces(): void
+    #[TestDox('applyTrim() on list with no spaces leaves strings unchanged')]
+    public function test_apply_trim_unchanged_when_no_spaces(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that trim() does not alter strings that
-        // don't have leading or trailing whitespace
+        // this test proves that applyTrim() does not alter strings
+        // that don't have leading or trailing whitespace
 
         // ----------------------------------------------------------------
         // setup your test
@@ -1518,7 +1518,7 @@ class ListOfStringsTest extends TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->trim();
+        $unit->applyTrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -1526,13 +1526,14 @@ class ListOfStringsTest extends TestCase
         $this->assertSame($expectedData, $unit->toArray());
     }
 
-    #[TestDox('trim() handles empty list')]
-    public function test_trim_on_empty_list(): void
+    #[TestDox('applyTrim() handles empty list')]
+    public function test_apply_trim_on_empty_list(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that trim() works correctly on empty lists
+        // this test proves that applyTrim() works correctly on empty
+        // lists
 
         // ----------------------------------------------------------------
         // setup your test
@@ -1542,7 +1543,7 @@ class ListOfStringsTest extends TestCase
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->trim();
+        $unit->applyTrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -1551,13 +1552,13 @@ class ListOfStringsTest extends TestCase
         $this->assertCount(0, $unit);
     }
 
-    #[TestDox('trim() handles strings with newlines and tabs')]
-    public function test_trim_removes_newlines_and_tabs(): void
+    #[TestDox('applyTrim() handles strings with newlines and tabs')]
+    public function test_apply_trim_removes_newlines_and_tabs(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that trim() removes newline and tab
+        // this test proves that applyTrim() removes newline and tab
         // characters
 
         // ----------------------------------------------------------------
@@ -1573,7 +1574,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->trim();
+        $unit->applyTrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -1581,13 +1582,13 @@ alpha", "bravo	", "charlie
         $this->assertSame($expectedTrimmed, $unit->toArray());
     }
 
-    #[TestDox('trim() handles empty strings')]
-    public function test_trim_preserves_empty_strings(): void
+    #[TestDox('applyTrim() handles empty strings')]
+    public function test_apply_trim_preserves_empty_strings(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that trim() correctly handles empty
+        // this test proves that applyTrim() correctly handles empty
         // strings
 
         // ----------------------------------------------------------------
@@ -1599,7 +1600,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->trim();
+        $unit->applyTrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -1607,13 +1608,13 @@ alpha", "bravo	", "charlie
         $this->assertSame($expectedData, $unit->toArray());
     }
 
-    #[TestDox('trim() can be chained with other methods')]
-    public function test_trim_supports_method_chaining(): void
+    #[TestDox('applyTrim() can be chained with other methods')]
+    public function test_apply_trim_supports_method_chaining(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that trim() returns $this for fluent
+        // this test proves that applyTrim() returns $this for fluent
         // method chaining
 
         // ----------------------------------------------------------------
@@ -1624,7 +1625,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $result = $unit->trim();
+        $result = $unit->applyTrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -1632,14 +1633,14 @@ alpha", "bravo	", "charlie
         $this->assertSame($unit, $result);
     }
 
-    #[TestDox('trim() can be used fluently with add()')]
-    public function test_trim_with_add(): void
+    #[TestDox('applyTrim() can be used fluently with add()')]
+    public function test_apply_trim_with_add(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that trim() works correctly with strings
-        // added dynamically via add()
+        // this test proves that applyTrim() works correctly with
+        // strings added dynamically via add()
 
         // ----------------------------------------------------------------
         // setup your test
@@ -1649,7 +1650,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->add('  bravo  ')->trim();
+        $unit->add('  bravo  ')->applyTrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -1657,15 +1658,15 @@ alpha", "bravo	", "charlie
         $this->assertSame(['alpha', 'bravo'], $unit->toArray());
     }
 
-    #[TestDox('trim() with custom characters strips only those characters')]
-    public function test_trim_with_custom_characters(): void
+    #[TestDox('applyTrim() with custom characters strips only those characters')]
+    public function test_apply_trim_with_custom_characters(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that when a custom $characters parameter
-        // is provided, trim() only strips those specified characters
-        // from the strings
+        // is provided, applyTrim() only strips those specified
+        // characters from the strings
 
         // ----------------------------------------------------------------
         // setup your test
@@ -1675,7 +1676,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->trim(characters: '/');
+        $unit->applyTrim(characters: '/');
 
         // ----------------------------------------------------------------
         // test the results
@@ -1686,8 +1687,8 @@ alpha", "bravo	", "charlie
         );
     }
 
-    #[TestDox('trim() with custom characters does not strip whitespace')]
-    public function test_trim_with_custom_characters_preserves_whitespace(): void
+    #[TestDox('applyTrim() with custom characters does not strip whitespace')]
+    public function test_apply_trim_with_custom_characters_preserves_whitespace(): void
     {
         // ----------------------------------------------------------------
         // explain your test
@@ -1704,7 +1705,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->trim(characters: '/');
+        $unit->applyTrim(characters: '/');
 
         // ----------------------------------------------------------------
         // test the results
@@ -1715,14 +1716,14 @@ alpha", "bravo	", "charlie
         );
     }
 
-    #[TestDox('trim() with custom characters handles empty list')]
-    public function test_trim_with_custom_characters_on_empty_list(): void
+    #[TestDox('applyTrim() with custom characters handles empty list')]
+    public function test_apply_trim_with_custom_characters_on_empty_list(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that trim() with custom characters works
-        // correctly on an empty list without error
+        // this test proves that applyTrim() with custom characters
+        // works correctly on an empty list without error
 
         // ----------------------------------------------------------------
         // setup your test
@@ -1732,7 +1733,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->trim(characters: '/');
+        $unit->applyTrim(characters: '/');
 
         // ----------------------------------------------------------------
         // test the results
@@ -1741,13 +1742,13 @@ alpha", "bravo	", "charlie
         $this->assertCount(0, $unit);
     }
 
-    #[TestDox('trim() with custom characters returns $this for chaining')]
-    public function test_trim_with_custom_characters_returns_this(): void
+    #[TestDox('applyTrim() with custom characters returns $this for chaining')]
+    public function test_apply_trim_with_custom_characters_returns_this(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that trim() returns $this for fluent
+        // this test proves that applyTrim() returns $this for fluent
         // method chaining when custom characters are provided
 
         // ----------------------------------------------------------------
@@ -1758,7 +1759,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $result = $unit->trim(characters: '/');
+        $result = $unit->applyTrim(characters: '/');
 
         // ----------------------------------------------------------------
         // test the results
@@ -1768,19 +1769,19 @@ alpha", "bravo	", "charlie
 
     // ================================================================
     //
-    // ltrim()
+    // applyLtrim()
     //
     // ----------------------------------------------------------------
 
-    #[TestDox('ltrim() removes leading whitespace from strings')]
-    public function test_ltrim_removes_leading_whitespace(): void
+    #[TestDox('applyLtrim() removes leading whitespace from strings')]
+    public function test_apply_ltrim_removes_leading_whitespace(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that ltrim() removes leading whitespace
-        // from all strings in the list, while preserving trailing
-        // whitespace
+        // this test proves that applyLtrim() removes leading
+        // whitespace from all strings in the list, while preserving
+        // trailing whitespace
 
         // ----------------------------------------------------------------
         // setup your test
@@ -1790,7 +1791,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->ltrim();
+        $unit->applyLtrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -1801,13 +1802,13 @@ alpha", "bravo	", "charlie
         );
     }
 
-    #[TestDox('ltrim() preserves trailing whitespace')]
-    public function test_ltrim_preserves_trailing_whitespace(): void
+    #[TestDox('applyLtrim() preserves trailing whitespace')]
+    public function test_apply_ltrim_preserves_trailing_whitespace(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that ltrim() only removes leading
+        // this test proves that applyLtrim() only removes leading
         // whitespace and does not affect trailing whitespace
 
         // ----------------------------------------------------------------
@@ -1818,7 +1819,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->ltrim();
+        $unit->applyLtrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -1829,14 +1830,14 @@ alpha", "bravo	", "charlie
         );
     }
 
-    #[TestDox('ltrim() on list with no leading spaces leaves strings unchanged')]
-    public function test_ltrim_unchanged_when_no_leading_spaces(): void
+    #[TestDox('applyLtrim() on list with no leading spaces leaves strings unchanged')]
+    public function test_apply_ltrim_unchanged_when_no_leading_spaces(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that ltrim() does not alter strings that
-        // don't have leading whitespace
+        // this test proves that applyLtrim() does not alter strings
+        // that don't have leading whitespace
 
         // ----------------------------------------------------------------
         // setup your test
@@ -1847,7 +1848,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->ltrim();
+        $unit->applyLtrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -1855,14 +1856,14 @@ alpha", "bravo	", "charlie
         $this->assertSame($expectedData, $unit->toArray());
     }
 
-    #[TestDox('ltrim() handles empty list')]
-    public function test_ltrim_on_empty_list(): void
+    #[TestDox('applyLtrim() handles empty list')]
+    public function test_apply_ltrim_on_empty_list(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that ltrim() works correctly on empty
-        // lists
+        // this test proves that applyLtrim() works correctly on
+        // empty lists
 
         // ----------------------------------------------------------------
         // setup your test
@@ -1872,7 +1873,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->ltrim();
+        $unit->applyLtrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -1881,14 +1882,14 @@ alpha", "bravo	", "charlie
         $this->assertCount(0, $unit);
     }
 
-    #[TestDox('ltrim() handles strings with leading newlines and tabs')]
-    public function test_ltrim_removes_leading_newlines_and_tabs(): void
+    #[TestDox('applyLtrim() handles strings with leading newlines and tabs')]
+    public function test_apply_ltrim_removes_leading_newlines_and_tabs(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that ltrim() removes leading newline and
-        // tab characters
+        // this test proves that applyLtrim() removes leading newline
+        // and tab characters
 
         // ----------------------------------------------------------------
         // setup your test
@@ -1902,7 +1903,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->ltrim();
+        $unit->applyLtrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -1913,13 +1914,13 @@ alpha", "bravo	", "charlie
         );
     }
 
-    #[TestDox('ltrim() handles empty strings')]
-    public function test_ltrim_preserves_empty_strings(): void
+    #[TestDox('applyLtrim() handles empty strings')]
+    public function test_apply_ltrim_preserves_empty_strings(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that ltrim() correctly handles empty
+        // this test proves that applyLtrim() correctly handles empty
         // strings
 
         // ----------------------------------------------------------------
@@ -1931,7 +1932,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->ltrim();
+        $unit->applyLtrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -1939,14 +1940,14 @@ alpha", "bravo	", "charlie
         $this->assertSame($expectedData, $unit->toArray());
     }
 
-    #[TestDox('ltrim() returns $this for method chaining')]
-    public function test_ltrim_supports_method_chaining(): void
+    #[TestDox('applyLtrim() returns $this for method chaining')]
+    public function test_apply_ltrim_supports_method_chaining(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that ltrim() returns $this for fluent
-        // method chaining
+        // this test proves that applyLtrim() returns $this for
+        // fluent method chaining
 
         // ----------------------------------------------------------------
         // setup your test
@@ -1956,7 +1957,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $result = $unit->ltrim();
+        $result = $unit->applyLtrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -1964,14 +1965,14 @@ alpha", "bravo	", "charlie
         $this->assertSame($unit, $result);
     }
 
-    #[TestDox('ltrim() can be used fluently with add()')]
-    public function test_ltrim_with_add(): void
+    #[TestDox('applyLtrim() can be used fluently with add()')]
+    public function test_apply_ltrim_with_add(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that ltrim() works correctly with strings
-        // added dynamically via add()
+        // this test proves that applyLtrim() works correctly with
+        // strings added dynamically via add()
 
         // ----------------------------------------------------------------
         // setup your test
@@ -1981,7 +1982,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->add('  bravo  ')->ltrim();
+        $unit->add('  bravo  ')->applyLtrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -1992,15 +1993,15 @@ alpha", "bravo	", "charlie
         );
     }
 
-    #[TestDox('ltrim() with custom characters strips only those characters from the left')]
-    public function test_ltrim_with_custom_characters(): void
+    #[TestDox('applyLtrim() with custom characters strips only those characters from the left')]
+    public function test_apply_ltrim_with_custom_characters(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that when a custom $characters parameter
-        // is provided, ltrim() only strips those specified characters
-        // from the left side of the strings
+        // is provided, applyLtrim() only strips those specified
+        // characters from the left side of the strings
 
         // ----------------------------------------------------------------
         // setup your test
@@ -2010,7 +2011,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->ltrim(characters: '/');
+        $unit->applyLtrim(characters: '/');
 
         // ----------------------------------------------------------------
         // test the results
@@ -2021,8 +2022,8 @@ alpha", "bravo	", "charlie
         );
     }
 
-    #[TestDox('ltrim() with custom characters does not strip whitespace')]
-    public function test_ltrim_with_custom_characters_preserves_whitespace(): void
+    #[TestDox('applyLtrim() with custom characters does not strip whitespace')]
+    public function test_apply_ltrim_with_custom_characters_preserves_whitespace(): void
     {
         // ----------------------------------------------------------------
         // explain your test
@@ -2039,7 +2040,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->ltrim(characters: '/');
+        $unit->applyLtrim(characters: '/');
 
         // ----------------------------------------------------------------
         // test the results
@@ -2050,14 +2051,14 @@ alpha", "bravo	", "charlie
         );
     }
 
-    #[TestDox('ltrim() with custom characters handles empty list')]
-    public function test_ltrim_with_custom_characters_on_empty_list(): void
+    #[TestDox('applyLtrim() with custom characters handles empty list')]
+    public function test_apply_ltrim_with_custom_characters_on_empty_list(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that ltrim() with custom characters works
-        // correctly on an empty list without error
+        // this test proves that applyLtrim() with custom characters
+        // works correctly on an empty list without error
 
         // ----------------------------------------------------------------
         // setup your test
@@ -2067,7 +2068,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->ltrim(characters: '/');
+        $unit->applyLtrim(characters: '/');
 
         // ----------------------------------------------------------------
         // test the results
@@ -2076,14 +2077,14 @@ alpha", "bravo	", "charlie
         $this->assertCount(0, $unit);
     }
 
-    #[TestDox('ltrim() with custom characters returns $this for chaining')]
-    public function test_ltrim_with_custom_characters_returns_this(): void
+    #[TestDox('applyLtrim() with custom characters returns $this for chaining')]
+    public function test_apply_ltrim_with_custom_characters_returns_this(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that ltrim() returns $this for fluent
-        // method chaining when custom characters are provided
+        // this test proves that applyLtrim() returns $this for
+        // fluent method chaining when custom characters are provided
 
         // ----------------------------------------------------------------
         // setup your test
@@ -2093,7 +2094,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $result = $unit->ltrim(characters: '/');
+        $result = $unit->applyLtrim(characters: '/');
 
         // ----------------------------------------------------------------
         // test the results
@@ -2103,19 +2104,19 @@ alpha", "bravo	", "charlie
 
     // ================================================================
     //
-    // rtrim()
+    // applyRtrim()
     //
     // ----------------------------------------------------------------
 
-    #[TestDox('rtrim() removes trailing whitespace from strings')]
-    public function test_rtrim_removes_trailing_whitespace(): void
+    #[TestDox('applyRtrim() removes trailing whitespace from strings')]
+    public function test_apply_rtrim_removes_trailing_whitespace(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that rtrim() removes trailing whitespace
-        // from all strings in the list, while preserving leading
-        // whitespace
+        // this test proves that applyRtrim() removes trailing
+        // whitespace from all strings in the list, while preserving
+        // leading whitespace
 
         // ----------------------------------------------------------------
         // setup your test
@@ -2125,7 +2126,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->rtrim();
+        $unit->applyRtrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -2136,13 +2137,13 @@ alpha", "bravo	", "charlie
         );
     }
 
-    #[TestDox('rtrim() preserves leading whitespace')]
-    public function test_rtrim_preserves_leading_whitespace(): void
+    #[TestDox('applyRtrim() preserves leading whitespace')]
+    public function test_apply_rtrim_preserves_leading_whitespace(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that rtrim() only removes trailing
+        // this test proves that applyRtrim() only removes trailing
         // whitespace and does not affect leading whitespace
 
         // ----------------------------------------------------------------
@@ -2153,7 +2154,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->rtrim();
+        $unit->applyRtrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -2164,14 +2165,14 @@ alpha", "bravo	", "charlie
         );
     }
 
-    #[TestDox('rtrim() on list with no trailing spaces leaves strings unchanged')]
-    public function test_rtrim_unchanged_when_no_trailing_spaces(): void
+    #[TestDox('applyRtrim() on list with no trailing spaces leaves strings unchanged')]
+    public function test_apply_rtrim_unchanged_when_no_trailing_spaces(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that rtrim() does not alter strings that
-        // don't have trailing whitespace
+        // this test proves that applyRtrim() does not alter strings
+        // that don't have trailing whitespace
 
         // ----------------------------------------------------------------
         // setup your test
@@ -2182,7 +2183,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->rtrim();
+        $unit->applyRtrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -2190,14 +2191,14 @@ alpha", "bravo	", "charlie
         $this->assertSame($expectedData, $unit->toArray());
     }
 
-    #[TestDox('rtrim() handles empty list')]
-    public function test_rtrim_on_empty_list(): void
+    #[TestDox('applyRtrim() handles empty list')]
+    public function test_apply_rtrim_on_empty_list(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that rtrim() works correctly on empty
-        // lists
+        // this test proves that applyRtrim() works correctly on
+        // empty lists
 
         // ----------------------------------------------------------------
         // setup your test
@@ -2207,7 +2208,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->rtrim();
+        $unit->applyRtrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -2216,14 +2217,14 @@ alpha", "bravo	", "charlie
         $this->assertCount(0, $unit);
     }
 
-    #[TestDox('rtrim() handles strings with trailing newlines and tabs')]
-    public function test_rtrim_removes_trailing_newlines_and_tabs(): void
+    #[TestDox('applyRtrim() handles strings with trailing newlines and tabs')]
+    public function test_apply_rtrim_removes_trailing_newlines_and_tabs(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that rtrim() removes trailing newline
-        // and tab characters
+        // this test proves that applyRtrim() removes trailing
+        // newline and tab characters
 
         // ----------------------------------------------------------------
         // setup your test
@@ -2237,7 +2238,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->rtrim();
+        $unit->applyRtrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -2248,13 +2249,13 @@ alpha", "bravo	", "charlie
         );
     }
 
-    #[TestDox('rtrim() handles empty strings')]
-    public function test_rtrim_preserves_empty_strings(): void
+    #[TestDox('applyRtrim() handles empty strings')]
+    public function test_apply_rtrim_preserves_empty_strings(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that rtrim() correctly handles empty
+        // this test proves that applyRtrim() correctly handles empty
         // strings
 
         // ----------------------------------------------------------------
@@ -2266,7 +2267,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->rtrim();
+        $unit->applyRtrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -2274,14 +2275,14 @@ alpha", "bravo	", "charlie
         $this->assertSame($expectedData, $unit->toArray());
     }
 
-    #[TestDox('rtrim() returns $this for method chaining')]
-    public function test_rtrim_supports_method_chaining(): void
+    #[TestDox('applyRtrim() returns $this for method chaining')]
+    public function test_apply_rtrim_supports_method_chaining(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that rtrim() returns $this for fluent
-        // method chaining
+        // this test proves that applyRtrim() returns $this for
+        // fluent method chaining
 
         // ----------------------------------------------------------------
         // setup your test
@@ -2291,7 +2292,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $result = $unit->rtrim();
+        $result = $unit->applyRtrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -2299,14 +2300,14 @@ alpha", "bravo	", "charlie
         $this->assertSame($unit, $result);
     }
 
-    #[TestDox('rtrim() can be used fluently with add()')]
-    public function test_rtrim_with_add(): void
+    #[TestDox('applyRtrim() can be used fluently with add()')]
+    public function test_apply_rtrim_with_add(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that rtrim() works correctly with strings
-        // added dynamically via add()
+        // this test proves that applyRtrim() works correctly with
+        // strings added dynamically via add()
 
         // ----------------------------------------------------------------
         // setup your test
@@ -2316,7 +2317,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->add('  bravo  ')->rtrim();
+        $unit->add('  bravo  ')->applyRtrim();
 
         // ----------------------------------------------------------------
         // test the results
@@ -2327,15 +2328,15 @@ alpha", "bravo	", "charlie
         );
     }
 
-    #[TestDox('rtrim() with custom characters strips only those characters from the right')]
-    public function test_rtrim_with_custom_characters(): void
+    #[TestDox('applyRtrim() with custom characters strips only those characters from the right')]
+    public function test_apply_rtrim_with_custom_characters(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
         // this test proves that when a custom $characters parameter
-        // is provided, rtrim() only strips those specified characters
-        // from the right side of the strings
+        // is provided, applyRtrim() only strips those specified
+        // characters from the right side of the strings
 
         // ----------------------------------------------------------------
         // setup your test
@@ -2345,7 +2346,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->rtrim(characters: '/');
+        $unit->applyRtrim(characters: '/');
 
         // ----------------------------------------------------------------
         // test the results
@@ -2356,8 +2357,8 @@ alpha", "bravo	", "charlie
         );
     }
 
-    #[TestDox('rtrim() with custom characters does not strip whitespace')]
-    public function test_rtrim_with_custom_characters_preserves_whitespace(): void
+    #[TestDox('applyRtrim() with custom characters does not strip whitespace')]
+    public function test_apply_rtrim_with_custom_characters_preserves_whitespace(): void
     {
         // ----------------------------------------------------------------
         // explain your test
@@ -2374,7 +2375,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->rtrim(characters: '/');
+        $unit->applyRtrim(characters: '/');
 
         // ----------------------------------------------------------------
         // test the results
@@ -2385,14 +2386,14 @@ alpha", "bravo	", "charlie
         );
     }
 
-    #[TestDox('rtrim() with custom characters handles empty list')]
-    public function test_rtrim_with_custom_characters_on_empty_list(): void
+    #[TestDox('applyRtrim() with custom characters handles empty list')]
+    public function test_apply_rtrim_with_custom_characters_on_empty_list(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that rtrim() with custom characters works
-        // correctly on an empty list without error
+        // this test proves that applyRtrim() with custom characters
+        // works correctly on an empty list without error
 
         // ----------------------------------------------------------------
         // setup your test
@@ -2402,7 +2403,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $unit->rtrim(characters: '/');
+        $unit->applyRtrim(characters: '/');
 
         // ----------------------------------------------------------------
         // test the results
@@ -2411,14 +2412,14 @@ alpha", "bravo	", "charlie
         $this->assertCount(0, $unit);
     }
 
-    #[TestDox('rtrim() with custom characters returns $this for chaining')]
-    public function test_rtrim_with_custom_characters_returns_this(): void
+    #[TestDox('applyRtrim() with custom characters returns $this for chaining')]
+    public function test_apply_rtrim_with_custom_characters_returns_this(): void
     {
         // ----------------------------------------------------------------
         // explain your test
 
-        // this test proves that rtrim() returns $this for fluent
-        // method chaining when custom characters are provided
+        // this test proves that applyRtrim() returns $this for
+        // fluent method chaining when custom characters are provided
 
         // ----------------------------------------------------------------
         // setup your test
@@ -2428,7 +2429,7 @@ alpha", "bravo	", "charlie
         // ----------------------------------------------------------------
         // perform the change
 
-        $result = $unit->rtrim(characters: '/');
+        $result = $unit->applyRtrim(characters: '/');
 
         // ----------------------------------------------------------------
         // test the results

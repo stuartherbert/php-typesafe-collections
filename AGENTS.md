@@ -72,6 +72,9 @@ Use paired methods for nullable vs throwing accessors:
 - `maybeFirst()` / `first()` - returns null vs throws on empty collection
 - `maybeGet($key)` / `get($key)` - returns null vs throws on missing key
 
+#### Data Transformation Methods (`apply` prefix)
+Methods that transform stored data in-place must be prefixed with `apply` (e.g. `applyTrim()`, `applyLtrim()`, `applyRtrim()`). This distinguishes them from accessors and other operations. They return `static` for fluent chaining.
+
 #### Method Chaining
 Data modification methods should return `$this` or `static` for fluent chaining.
 

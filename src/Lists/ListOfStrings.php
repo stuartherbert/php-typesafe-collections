@@ -54,7 +54,7 @@ class ListOfStrings extends CollectionAsList
      *
      * @return static
      */
-    public function trim(string $characters = " \n\r\t\v\0"): static
+    public function applyTrim(string $characters = " \n\r\t\v\0"): static
     {
         $this->data = array_map(
             fn(string $value) => trim($value, $characters),
@@ -70,7 +70,7 @@ class ListOfStrings extends CollectionAsList
      *
      * @return static
      */
-    public function ltrim(string $characters = " \n\r\t\v\0"): static
+    public function applyLtrim(string $characters = " \n\r\t\v\0"): static
     {
         $this->data = array_map(
             fn(string $value) => ltrim($value, $characters),
@@ -86,7 +86,7 @@ class ListOfStrings extends CollectionAsList
      *
      * @return static
      */
-    public function rtrim(string $characters = " \n\r\t\v\0"): static
+    public function applyRtrim(string $characters = " \n\r\t\v\0"): static
     {
         $this->data = array_map(
             fn(string $value) => rtrim($value, $characters),

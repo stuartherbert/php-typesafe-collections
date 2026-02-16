@@ -131,6 +131,24 @@ Dictionaries and Indexes additionally provide:
 | `maybeGet($key)` | Returns the value for `$key`, or `null` if not found. |
 | `has($key)` | Returns `true` if the key exists. |
 
+## Data Transformation Methods
+
+Some collections provide methods that transform the stored data in-place. These methods are all prefixed with `apply` to clearly distinguish them from accessors and other operations.
+
+| Class | Method | Description |
+|-------|--------|-------------|
+| `ListOfStrings` | `applyTrim()` | Trims whitespace (or custom characters) from all strings using PHP's `trim()`. |
+| `ListOfStrings` | `applyLtrim()` | Left-trims whitespace (or custom characters) from all strings using PHP's `ltrim()`. |
+| `ListOfStrings` | `applyRtrim()` | Right-trims whitespace (or custom characters) from all strings using PHP's `rtrim()`. |
+
+All `apply*` methods return `$this` for fluent chaining:
+
+```php
+$list = new ListOfStrings(['  /hello/  ', '  /world/  ']);
+$list->applyTrim()->applyTrim(characters: '/');
+// ['hello', 'world']
+```
+
 ## Contracts
 
 The library provides interfaces for entities that can be stored in Indexes:
