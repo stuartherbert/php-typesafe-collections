@@ -2103,6 +2103,341 @@ alpha", "bravo	", "charlie
 
     // ================================================================
     //
+    // rtrim()
+    //
+    // ----------------------------------------------------------------
+
+    #[TestDox('rtrim() removes trailing whitespace from strings')]
+    public function test_rtrim_removes_trailing_whitespace(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that rtrim() removes trailing whitespace
+        // from all strings in the list, while preserving leading
+        // whitespace
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['  alpha  ', '  bravo  ', '  charlie  ']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->rtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['  alpha', '  bravo', '  charlie'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('rtrim() preserves leading whitespace')]
+    public function test_rtrim_preserves_leading_whitespace(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that rtrim() only removes trailing
+        // whitespace and does not affect leading whitespace
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['  alpha', '  bravo']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->rtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['  alpha', '  bravo'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('rtrim() on list with no trailing spaces leaves strings unchanged')]
+    public function test_rtrim_unchanged_when_no_trailing_spaces(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that rtrim() does not alter strings that
+        // don't have trailing whitespace
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $expectedData = ['alpha', 'bravo', 'charlie'];
+        $unit = new ListOfStrings($expectedData);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->rtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($expectedData, $unit->toArray());
+    }
+
+    #[TestDox('rtrim() handles empty list')]
+    public function test_rtrim_on_empty_list(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that rtrim() works correctly on empty
+        // lists
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings();
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->rtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame([], $unit->toArray());
+        $this->assertCount(0, $unit);
+    }
+
+    #[TestDox('rtrim() handles strings with trailing newlines and tabs')]
+    public function test_rtrim_removes_trailing_newlines_and_tabs(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that rtrim() removes trailing newline
+        // and tab characters
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings([
+            "alpha\n",
+            "bravo\t",
+            "charlie\n\t",
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->rtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['alpha', 'bravo', 'charlie'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('rtrim() handles empty strings')]
+    public function test_rtrim_preserves_empty_strings(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that rtrim() correctly handles empty
+        // strings
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $expectedData = ['', 'alpha', '', 'bravo', ''];
+        $unit = new ListOfStrings($expectedData);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->rtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($expectedData, $unit->toArray());
+    }
+
+    #[TestDox('rtrim() returns $this for method chaining')]
+    public function test_rtrim_supports_method_chaining(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that rtrim() returns $this for fluent
+        // method chaining
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['  alpha  ', '  bravo  ']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $result = $unit->rtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($unit, $result);
+    }
+
+    #[TestDox('rtrim() can be used fluently with add()')]
+    public function test_rtrim_with_add(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that rtrim() works correctly with strings
+        // added dynamically via add()
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['  alpha  ']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->add('  bravo  ')->rtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['  alpha', '  bravo'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('rtrim() with custom characters strips only those characters from the right')]
+    public function test_rtrim_with_custom_characters(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that when a custom $characters parameter
+        // is provided, rtrim() only strips those specified characters
+        // from the right side of the strings
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['/path/', '//double//', 'single/']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->rtrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['/path', '//double', 'single'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('rtrim() with custom characters does not strip whitespace')]
+    public function test_rtrim_with_custom_characters_preserves_whitespace(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that when custom characters are provided,
+        // default whitespace is not stripped — only the specified
+        // characters are removed from the right
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['/ path /', '/ hello /']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->rtrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['/ path ', '/ hello '],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('rtrim() with custom characters handles empty list')]
+    public function test_rtrim_with_custom_characters_on_empty_list(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that rtrim() with custom characters works
+        // correctly on an empty list without error
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings();
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->rtrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame([], $unit->toArray());
+        $this->assertCount(0, $unit);
+    }
+
+    #[TestDox('rtrim() with custom characters returns $this for chaining')]
+    public function test_rtrim_with_custom_characters_returns_this(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that rtrim() returns $this for fluent
+        // method chaining when custom characters are provided
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['/path/', '/other/']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $result = $unit->rtrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($unit, $result);
+    }
+
+    // ================================================================
+    //
     // getCollectionTypeAsString()
     //
     // -----------------------------------------------------------------------

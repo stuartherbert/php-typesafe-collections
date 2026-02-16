@@ -79,4 +79,20 @@ class ListOfStrings extends CollectionAsList
 
         return $this;
     }
+
+    /**
+     * Right-trims all strings in the list using PHP's rtrim()
+     * function.
+     *
+     * @return static
+     */
+    public function rtrim(string $characters = " \n\r\t\v\0"): static
+    {
+        $this->data = array_map(
+            fn(string $value) => rtrim($value, $characters),
+            $this->data,
+        );
+
+        return $this;
+    }
 }
