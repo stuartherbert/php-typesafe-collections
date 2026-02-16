@@ -43,4 +43,24 @@ namespace StuartHerbert\TypesafeCollections\Lists;
  */
 class ListOfStrings extends CollectionAsList
 {
+    // ================================================================
+    //
+    // Data transformation
+    //
+    // ----------------------------------------------------------------
+
+    /**
+     * Trims all strings in the list using PHP's trim() function.
+     *
+     * @return static
+     */
+    public function trim(string $characters = " \n\r\t\v\0"): static
+    {
+        $this->data = array_map(
+            fn(string $value) => trim($value, $characters),
+            $this->data,
+        );
+
+        return $this;
+    }
 }

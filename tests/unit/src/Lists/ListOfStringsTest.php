@@ -1469,9 +1469,308 @@ class ListOfStringsTest extends TestCase
 
     // ================================================================
     //
-    // getCollectionTypeAsString()
+    // trim()
     //
     // ----------------------------------------------------------------
+
+    #[TestDox('trim() removes whitespace from strings in the list')]
+    public function test_trim_removes_whitespace_from_strings(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that trim() uses PHP's trim() function
+        // to remove whitespace from all strings in the list
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $expectedData = ['  alpha  ', '  bravo  ', '  charlie  '];
+        $expectedTrimmed = ['alpha', 'bravo', 'charlie'];
+        $unit = new ListOfStrings($expectedData);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->trim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($expectedTrimmed, $unit->toArray());
+    }
+
+    #[TestDox('trim() on list with no spaces leaves strings unchanged')]
+    public function test_trim_unchanged_when_no_spaces(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that trim() does not alter strings that
+        // don't have leading or trailing whitespace
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $expectedData = ['alpha', 'bravo', 'charlie'];
+        $unit = new ListOfStrings($expectedData);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->trim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($expectedData, $unit->toArray());
+    }
+
+    #[TestDox('trim() handles empty list')]
+    public function test_trim_on_empty_list(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that trim() works correctly on empty lists
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings();
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->trim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame([], $unit->toArray());
+        $this->assertCount(0, $unit);
+    }
+
+    #[TestDox('trim() handles strings with newlines and tabs')]
+    public function test_trim_removes_newlines_and_tabs(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that trim() removes newline and tab
+        // characters
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $expectedData = ["
+alpha", "bravo	", "charlie
+
+"];
+        $expectedTrimmed = ['alpha', 'bravo', 'charlie'];
+        $unit = new ListOfStrings($expectedData);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->trim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($expectedTrimmed, $unit->toArray());
+    }
+
+    #[TestDox('trim() handles empty strings')]
+    public function test_trim_preserves_empty_strings(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that trim() correctly handles empty
+        // strings
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $expectedData = ['', 'alpha', '', 'bravo', ''];
+        $unit = new ListOfStrings($expectedData);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->trim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($expectedData, $unit->toArray());
+    }
+
+    #[TestDox('trim() can be chained with other methods')]
+    public function test_trim_supports_method_chaining(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that trim() returns $this for fluent
+        // method chaining
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['  alpha  ', '  bravo  ']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $result = $unit->trim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($unit, $result);
+    }
+
+    #[TestDox('trim() can be used fluently with add()')]
+    public function test_trim_with_add(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that trim() works correctly with strings
+        // added dynamically via add()
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['  alpha  ']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->add('  bravo  ')->trim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(['alpha', 'bravo'], $unit->toArray());
+    }
+
+    #[TestDox('trim() with custom characters strips only those characters')]
+    public function test_trim_with_custom_characters(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that when a custom $characters parameter
+        // is provided, trim() only strips those specified characters
+        // from the strings
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['/path/', '//double//', '/single']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->trim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['path', 'double', 'single'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('trim() with custom characters does not strip whitespace')]
+    public function test_trim_with_custom_characters_preserves_whitespace(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that when custom characters are provided,
+        // default whitespace is not stripped — only the specified
+        // characters are removed
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['/ path /', '/ hello /']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->trim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            [' path ', ' hello '],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('trim() with custom characters handles empty list')]
+    public function test_trim_with_custom_characters_on_empty_list(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that trim() with custom characters works
+        // correctly on an empty list without error
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings();
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->trim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame([], $unit->toArray());
+        $this->assertCount(0, $unit);
+    }
+
+    #[TestDox('trim() with custom characters returns $this for chaining')]
+    public function test_trim_with_custom_characters_returns_this(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that trim() returns $this for fluent
+        // method chaining when custom characters are provided
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new ListOfStrings(['/path/', '/other/']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $result = $unit->trim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($unit, $result);
+    }
+
+    // ================================================================
+    //
+    // getCollectionTypeAsString()
+    //
+    // -----------------------------------------------------------------------
 
     #[TestDox('getCollectionTypeAsString() returns "ListOfStrings"')]
     public function test_get_collection_type_as_string_returns_class_basename(): void
@@ -1501,6 +1800,8 @@ class ListOfStringsTest extends TestCase
     // ================================================================
     //
     // Single-item lists
+    //
+    // -----------------------------------------------------
     //
     // ----------------------------------------------------------------
 
