@@ -34,16 +34,68 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Dictionaries;
-
-use StuartHerbert\TypesafeCollections\Traits\StringTransformations;
+namespace StuartHerbert\TypesafeCollections\Traits;
 
 /**
- * DictOfStrings holds a collection of strings.
+ * StringTransformations provides in-place string transformation
+ * methods for collections that hold string values.
  *
- * @extends CollectionAsDict<array-key, string>
+ * Use this trait in any collection class that extends
+ * CollectionOfAnything and stores strings.
  */
-class DictOfStrings extends CollectionAsDict
+trait StringTransformations
 {
-    use StringTransformations;
+    // ================================================================
+    //
+    // Data transformation
+    //
+    // ----------------------------------------------------------------
+
+    /**
+     * Trims all strings in the collection using PHP's trim()
+     * function.
+     *
+     * @return static
+     */
+    public function applyTrim(string $characters = " \n\r\t\v\0"): static
+    {
+        $this->data = array_map(
+            fn(string $value) => trim($value, $characters),
+            $this->data,
+        );
+
+        return $this;
+    }
+
+    /**
+     * Left-trims all strings in the collection using PHP's ltrim()
+     * function.
+     *
+     * @return static
+     */
+    public function applyLtrim(string $characters = " \n\r\t\v\0"): static
+    {
+        $this->data = array_map(
+            fn(string $value) => ltrim($value, $characters),
+            $this->data,
+        );
+
+        return $this;
+    }
+
+    /**
+     * Right-trims all strings in the collection using PHP's rtrim()
+     * function.
+     *
+     * @return static
+     */
+    public function applyRtrim(string $characters = " \n\r\t\v\0"): static
+    {
+        $this->data = array_map(
+            fn(string $value) => rtrim($value, $characters),
+            $this->data,
+        );
+
+        return $this;
+    }
 }

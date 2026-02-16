@@ -2159,4 +2159,1089 @@ class DictOfStringsTest extends TestCase
         $this->assertSame('localhost', $getResult);
         $this->assertSame($getResult, $maybeGetResult);
     }
+
+    // ================================================================
+    //
+    // applyTrim()
+    //
+    // ----------------------------------------------------------------
+
+    #[TestDox('applyTrim() removes whitespace from strings in the dict')]
+    public function test_apply_trim_removes_whitespace_from_strings(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyTrim() uses PHP's trim()
+        // function to remove whitespace from all strings in the
+        // dict
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $expectedTrimmed = [
+            'host' => 'localhost',
+            'port' => '3306',
+            'name' => 'mydb',
+        ];
+        $unit = new DictOfStrings([
+            'host' => '  localhost  ',
+            'port' => '  3306  ',
+            'name' => '  mydb  ',
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyTrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($expectedTrimmed, $unit->toArray());
+    }
+
+    #[TestDox('applyTrim() on dict with no spaces leaves strings unchanged')]
+    public function test_apply_trim_unchanged_when_no_spaces(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyTrim() does not alter strings
+        // that don't have leading or trailing whitespace
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $expectedData = [
+            'host' => 'localhost',
+            'port' => '3306',
+        ];
+        $unit = new DictOfStrings($expectedData);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyTrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($expectedData, $unit->toArray());
+    }
+
+    #[TestDox('applyTrim() handles empty dict')]
+    public function test_apply_trim_on_empty_dict(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyTrim() works correctly on
+        // empty dicts
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings();
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyTrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame([], $unit->toArray());
+        $this->assertCount(0, $unit);
+    }
+
+    #[TestDox('applyTrim() handles strings with newlines and tabs')]
+    public function test_apply_trim_removes_newlines_and_tabs(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyTrim() removes newline and tab
+        // characters
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => "\nalpha",
+            'b' => "bravo\t",
+            'c' => "\ncharlie\n",
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyTrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['a' => 'alpha', 'b' => 'bravo', 'c' => 'charlie'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('applyTrim() handles empty strings')]
+    public function test_apply_trim_preserves_empty_strings(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyTrim() correctly handles empty
+        // strings
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $expectedData = [
+            'a' => '',
+            'b' => 'alpha',
+            'c' => '',
+        ];
+        $unit = new DictOfStrings($expectedData);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyTrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($expectedData, $unit->toArray());
+    }
+
+    #[TestDox('applyTrim() can be chained with other methods')]
+    public function test_apply_trim_supports_method_chaining(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyTrim() returns $this for
+        // fluent method chaining
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => '  alpha  ',
+            'b' => '  bravo  ',
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $result = $unit->applyTrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($unit, $result);
+    }
+
+    #[TestDox('applyTrim() can be used fluently with set()')]
+    public function test_apply_trim_with_set(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyTrim() works correctly with
+        // strings added dynamically via set()
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings(['a' => '  alpha  ']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->set(key: 'b', value: '  bravo  ')->applyTrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['a' => 'alpha', 'b' => 'bravo'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('applyTrim() with custom characters strips only those characters')]
+    public function test_apply_trim_with_custom_characters(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that when a custom $characters parameter
+        // is provided, applyTrim() only strips those specified
+        // characters from the strings
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => '/path/',
+            'b' => '//double//',
+            'c' => '/single',
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyTrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['a' => 'path', 'b' => 'double', 'c' => 'single'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('applyTrim() with custom characters does not strip whitespace')]
+    public function test_apply_trim_with_custom_characters_preserves_whitespace(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that when custom characters are provided,
+        // default whitespace is not stripped — only the specified
+        // characters are removed
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => '/ path /',
+            'b' => '/ hello /',
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyTrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['a' => ' path ', 'b' => ' hello '],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('applyTrim() with custom characters handles empty dict')]
+    public function test_apply_trim_with_custom_characters_on_empty_dict(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyTrim() with custom characters
+        // works correctly on an empty dict without error
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings();
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyTrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame([], $unit->toArray());
+        $this->assertCount(0, $unit);
+    }
+
+    #[TestDox('applyTrim() with custom characters returns $this for chaining')]
+    public function test_apply_trim_with_custom_characters_returns_this(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyTrim() returns $this for
+        // fluent method chaining when custom characters are
+        // provided
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => '/path/',
+            'b' => '/other/',
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $result = $unit->applyTrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($unit, $result);
+    }
+
+    #[TestDox('applyTrim() preserves dict keys')]
+    public function test_apply_trim_preserves_keys(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyTrim() preserves the original
+        // string keys in the dict
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'host' => '  localhost  ',
+            'port' => '  3306  ',
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyTrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['host', 'port'],
+            array_keys($unit->toArray()),
+        );
+    }
+
+    // ================================================================
+    //
+    // applyLtrim()
+    //
+    // ----------------------------------------------------------------
+
+    #[TestDox('applyLtrim() removes leading whitespace from strings')]
+    public function test_apply_ltrim_removes_leading_whitespace(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyLtrim() removes leading
+        // whitespace from all strings in the dict, while preserving
+        // trailing whitespace
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => '  alpha  ',
+            'b' => '  bravo  ',
+            'c' => '  charlie  ',
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyLtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            [
+                'a' => 'alpha  ',
+                'b' => 'bravo  ',
+                'c' => 'charlie  ',
+            ],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('applyLtrim() preserves trailing whitespace')]
+    public function test_apply_ltrim_preserves_trailing_whitespace(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyLtrim() only removes leading
+        // whitespace and does not affect trailing whitespace
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => 'alpha  ',
+            'b' => 'bravo  ',
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyLtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['a' => 'alpha  ', 'b' => 'bravo  '],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('applyLtrim() on dict with no leading spaces leaves strings unchanged')]
+    public function test_apply_ltrim_unchanged_when_no_leading_spaces(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyLtrim() does not alter strings
+        // that don't have leading whitespace
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $expectedData = ['a' => 'alpha', 'b' => 'bravo'];
+        $unit = new DictOfStrings($expectedData);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyLtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($expectedData, $unit->toArray());
+    }
+
+    #[TestDox('applyLtrim() handles empty dict')]
+    public function test_apply_ltrim_on_empty_dict(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyLtrim() works correctly on
+        // empty dicts
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings();
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyLtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame([], $unit->toArray());
+        $this->assertCount(0, $unit);
+    }
+
+    #[TestDox('applyLtrim() handles strings with leading newlines and tabs')]
+    public function test_apply_ltrim_removes_leading_newlines_and_tabs(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyLtrim() removes leading
+        // newline and tab characters
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => "\nalpha",
+            'b' => "\tbravo",
+            'c' => "\n\tcharlie",
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyLtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['a' => 'alpha', 'b' => 'bravo', 'c' => 'charlie'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('applyLtrim() handles empty strings')]
+    public function test_apply_ltrim_preserves_empty_strings(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyLtrim() correctly handles
+        // empty strings
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $expectedData = ['a' => '', 'b' => 'alpha', 'c' => ''];
+        $unit = new DictOfStrings($expectedData);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyLtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($expectedData, $unit->toArray());
+    }
+
+    #[TestDox('applyLtrim() returns $this for method chaining')]
+    public function test_apply_ltrim_supports_method_chaining(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyLtrim() returns $this for
+        // fluent method chaining
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => '  alpha  ',
+            'b' => '  bravo  ',
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $result = $unit->applyLtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($unit, $result);
+    }
+
+    #[TestDox('applyLtrim() can be used fluently with set()')]
+    public function test_apply_ltrim_with_set(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyLtrim() works correctly with
+        // strings added dynamically via set()
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings(['a' => '  alpha  ']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->set(key: 'b', value: '  bravo  ')->applyLtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['a' => 'alpha  ', 'b' => 'bravo  '],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('applyLtrim() with custom characters strips only those characters from the left')]
+    public function test_apply_ltrim_with_custom_characters(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that when a custom $characters parameter
+        // is provided, applyLtrim() only strips those specified
+        // characters from the left side of the strings
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => '/path/',
+            'b' => '//double//',
+            'c' => '/single',
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyLtrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['a' => 'path/', 'b' => 'double//', 'c' => 'single'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('applyLtrim() with custom characters does not strip whitespace')]
+    public function test_apply_ltrim_with_custom_characters_preserves_whitespace(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that when custom characters are provided,
+        // default whitespace is not stripped — only the specified
+        // characters are removed from the left
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => '/ path /',
+            'b' => '/ hello /',
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyLtrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['a' => ' path /', 'b' => ' hello /'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('applyLtrim() with custom characters handles empty dict')]
+    public function test_apply_ltrim_with_custom_characters_on_empty_dict(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyLtrim() with custom characters
+        // works correctly on an empty dict without error
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings();
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyLtrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame([], $unit->toArray());
+        $this->assertCount(0, $unit);
+    }
+
+    #[TestDox('applyLtrim() with custom characters returns $this for chaining')]
+    public function test_apply_ltrim_with_custom_characters_returns_this(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyLtrim() returns $this for
+        // fluent method chaining when custom characters are
+        // provided
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => '/path/',
+            'b' => '/other/',
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $result = $unit->applyLtrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($unit, $result);
+    }
+
+    // ================================================================
+    //
+    // applyRtrim()
+    //
+    // ----------------------------------------------------------------
+
+    #[TestDox('applyRtrim() removes trailing whitespace from strings')]
+    public function test_apply_rtrim_removes_trailing_whitespace(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyRtrim() removes trailing
+        // whitespace from all strings in the dict, while preserving
+        // leading whitespace
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => '  alpha  ',
+            'b' => '  bravo  ',
+            'c' => '  charlie  ',
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyRtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            [
+                'a' => '  alpha',
+                'b' => '  bravo',
+                'c' => '  charlie',
+            ],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('applyRtrim() preserves leading whitespace')]
+    public function test_apply_rtrim_preserves_leading_whitespace(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyRtrim() only removes trailing
+        // whitespace and does not affect leading whitespace
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => '  alpha',
+            'b' => '  bravo',
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyRtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['a' => '  alpha', 'b' => '  bravo'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('applyRtrim() on dict with no trailing spaces leaves strings unchanged')]
+    public function test_apply_rtrim_unchanged_when_no_trailing_spaces(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyRtrim() does not alter strings
+        // that don't have trailing whitespace
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $expectedData = ['a' => 'alpha', 'b' => 'bravo'];
+        $unit = new DictOfStrings($expectedData);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyRtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($expectedData, $unit->toArray());
+    }
+
+    #[TestDox('applyRtrim() handles empty dict')]
+    public function test_apply_rtrim_on_empty_dict(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyRtrim() works correctly on
+        // empty dicts
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings();
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyRtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame([], $unit->toArray());
+        $this->assertCount(0, $unit);
+    }
+
+    #[TestDox('applyRtrim() handles strings with trailing newlines and tabs')]
+    public function test_apply_rtrim_removes_trailing_newlines_and_tabs(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyRtrim() removes trailing
+        // newline and tab characters
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => "alpha\n",
+            'b' => "bravo\t",
+            'c' => "charlie\n\t",
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyRtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['a' => 'alpha', 'b' => 'bravo', 'c' => 'charlie'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('applyRtrim() handles empty strings')]
+    public function test_apply_rtrim_preserves_empty_strings(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyRtrim() correctly handles
+        // empty strings
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $expectedData = ['a' => '', 'b' => 'alpha', 'c' => ''];
+        $unit = new DictOfStrings($expectedData);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyRtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($expectedData, $unit->toArray());
+    }
+
+    #[TestDox('applyRtrim() returns $this for method chaining')]
+    public function test_apply_rtrim_supports_method_chaining(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyRtrim() returns $this for
+        // fluent method chaining
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => '  alpha  ',
+            'b' => '  bravo  ',
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $result = $unit->applyRtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($unit, $result);
+    }
+
+    #[TestDox('applyRtrim() can be used fluently with set()')]
+    public function test_apply_rtrim_with_set(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyRtrim() works correctly with
+        // strings added dynamically via set()
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings(['a' => '  alpha  ']);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->set(key: 'b', value: '  bravo  ')->applyRtrim();
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['a' => '  alpha', 'b' => '  bravo'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('applyRtrim() with custom characters strips only those characters from the right')]
+    public function test_apply_rtrim_with_custom_characters(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that when a custom $characters parameter
+        // is provided, applyRtrim() only strips those specified
+        // characters from the right side of the strings
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => '/path/',
+            'b' => '//double//',
+            'c' => 'single/',
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyRtrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['a' => '/path', 'b' => '//double', 'c' => 'single'],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('applyRtrim() with custom characters does not strip whitespace')]
+    public function test_apply_rtrim_with_custom_characters_preserves_whitespace(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that when custom characters are provided,
+        // default whitespace is not stripped — only the specified
+        // characters are removed from the right
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => '/ path /',
+            'b' => '/ hello /',
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyRtrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame(
+            ['a' => '/ path ', 'b' => '/ hello '],
+            $unit->toArray(),
+        );
+    }
+
+    #[TestDox('applyRtrim() with custom characters handles empty dict')]
+    public function test_apply_rtrim_with_custom_characters_on_empty_dict(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyRtrim() with custom characters
+        // works correctly on an empty dict without error
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings();
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $unit->applyRtrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame([], $unit->toArray());
+        $this->assertCount(0, $unit);
+    }
+
+    #[TestDox('applyRtrim() with custom characters returns $this for chaining')]
+    public function test_apply_rtrim_with_custom_characters_returns_this(): void
+    {
+        // ----------------------------------------------------------------
+        // explain your test
+
+        // this test proves that applyRtrim() returns $this for
+        // fluent method chaining when custom characters are
+        // provided
+
+        // ----------------------------------------------------------------
+        // setup your test
+
+        $unit = new DictOfStrings([
+            'a' => '/path/',
+            'b' => '/other/',
+        ]);
+
+        // ----------------------------------------------------------------
+        // perform the change
+
+        $result = $unit->applyRtrim(characters: '/');
+
+        // ----------------------------------------------------------------
+        // test the results
+
+        $this->assertSame($unit, $result);
+    }
 }

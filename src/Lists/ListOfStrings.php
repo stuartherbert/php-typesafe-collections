@@ -36,6 +36,8 @@ declare(strict_types=1);
 
 namespace StuartHerbert\TypesafeCollections\Lists;
 
+use StuartHerbert\TypesafeCollections\Traits\StringTransformations;
+
 /**
  * ListOfStrings holds a list of strings.
  *
@@ -43,56 +45,5 @@ namespace StuartHerbert\TypesafeCollections\Lists;
  */
 class ListOfStrings extends CollectionAsList
 {
-    // ================================================================
-    //
-    // Data transformation
-    //
-    // ----------------------------------------------------------------
-
-    /**
-     * Trims all strings in the list using PHP's trim() function.
-     *
-     * @return static
-     */
-    public function applyTrim(string $characters = " \n\r\t\v\0"): static
-    {
-        $this->data = array_map(
-            fn(string $value) => trim($value, $characters),
-            $this->data,
-        );
-
-        return $this;
-    }
-
-    /**
-     * Left-trims all strings in the list using PHP's ltrim()
-     * function.
-     *
-     * @return static
-     */
-    public function applyLtrim(string $characters = " \n\r\t\v\0"): static
-    {
-        $this->data = array_map(
-            fn(string $value) => ltrim($value, $characters),
-            $this->data,
-        );
-
-        return $this;
-    }
-
-    /**
-     * Right-trims all strings in the list using PHP's rtrim()
-     * function.
-     *
-     * @return static
-     */
-    public function applyRtrim(string $characters = " \n\r\t\v\0"): static
-    {
-        $this->data = array_map(
-            fn(string $value) => rtrim($value, $characters),
-            $this->data,
-        );
-
-        return $this;
-    }
+    use StringTransformations;
 }
