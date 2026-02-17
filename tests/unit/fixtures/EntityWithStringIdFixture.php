@@ -36,9 +36,9 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Tests\Fixtures;
+namespace StusDevKit\TypesafeCollections\Tests\Fixtures;
 
-use StuartHerbert\TypesafeCollections\Contracts\EntityWithStringId;
+use StusDevKit\TypesafeCollections\Contracts\EntityWithStringId;
 
 class EntityWithStringIdFixture implements EntityWithStringId
 {

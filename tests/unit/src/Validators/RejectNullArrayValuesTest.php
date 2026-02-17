@@ -36,12 +36,12 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Tests\Unit\Validators;
+namespace StusDevKit\TypesafeCollections\Tests\Unit\Validators;
 
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
-use StuartHerbert\TypesafeCollections\Exceptions\NullValueNotAllowedException;
-use StuartHerbert\TypesafeCollections\Validators\RejectNullArrayValues;
+use StusDevKit\TypesafeCollections\Exceptions\NullValueNotAllowedException;
+use StusDevKit\TypesafeCollections\Validators\RejectNullArrayValues;
 
 #[TestDox('RejectNullArrayValues')]
 class RejectNullArrayValuesTest extends TestCase

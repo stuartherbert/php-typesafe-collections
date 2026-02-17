@@ -36,15 +36,15 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Tests\Unit\Dictionaries;
+namespace StusDevKit\TypesafeCollections\Tests\Unit\Dictionaries;
 
 use ArrayIterator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use StuartHerbert\TypesafeCollections\Dictionaries\DictOfIntegers;
-use StuartHerbert\TypesafeCollections\Dictionaries\DictOfNumbers;
+use StusDevKit\TypesafeCollections\Dictionaries\DictOfIntegers;
+use StusDevKit\TypesafeCollections\Dictionaries\DictOfNumbers;
 
 #[TestDox('DictOfIntegers')]
 class DictOfIntegersTest extends TestCase

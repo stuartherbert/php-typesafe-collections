@@ -9,8 +9,8 @@ This is the type-safe data collections library for PHP. It handles two types of 
 ## Architecture & Structure
 
 ### Namespace Structure
-- Root namespace: `StuartHerbert\TypesafeCollections`
-- Test namespace: `StuartHerbert\TypesafeCollections\Tests\Unit`
+- Root namespace: `StusDevKit\TypesafeCollections`
+- Test namespace: `StusDevKit\TypesafeCollections\Tests\Unit`
 - Tests mirror src directory structure under `tests/unit/src/`
 
 ### Directory Organization

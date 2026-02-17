@@ -1,5 +1,10 @@
 <?php
 
+// Stu's Dev Kit
+//
+// Building blocks for assembling the things you need to build, in a way
+// that will last.
+//
 // Copyright (c) 2026-present Stuart Herbert
 // All rights reserved.
 //
@@ -34,11 +39,11 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Dictionaries;
+namespace StusDevKit\TypesafeCollections\Dictionaries;
 
 use RuntimeException;
-use StuartHerbert\TypesafeCollections\CollectionOfAnything;
-use StuartHerbert\TypesafeCollections\Validators\RejectNullValue;
+use StusDevKit\TypesafeCollections\CollectionOfAnything;
+use StusDevKit\TypesafeCollections\Validators\RejectNullValue;
 
 /**
  * CollectionAsDict holds a collection of data that has identity (ie, it has

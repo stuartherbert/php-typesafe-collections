@@ -1,5 +1,10 @@
 <?php
 
+// Stu's Dev Kit
+//
+// Building blocks for assembling the things you need to build, in a way
+// that will last.
+//
 // Copyright (c) 2026-present Stuart Herbert
 // All rights reserved.
 //
@@ -34,14 +39,14 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections;
+namespace StusDevKit\TypesafeCollections;
 
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 use RuntimeException;
-use StuartHerbert\TypesafeCollections\Contracts\Arrayable;
-use StuartHerbert\TypesafeCollections\Validators\RejectNullArrayValues;
+use StusDevKit\TypesafeCollections\Contracts\Arrayable;
+use StusDevKit\TypesafeCollections\Validators\RejectNullArrayValues;
 
 /**
  * CollectionOfAnything is the base class for all typesafe collections.

@@ -1,11 +1,13 @@
 # typesafe-collections
 
-Type-safe data collection classes for PHP 8.5+, with full PHPStan level 9 support.
+Type-safe data collection classes for PHP 8.5+, with full PHPStan level 10 support.
+
+Part of Stu's Dev Kit: building blocks for assembling the things you need to build, in a way that will last.
 
 ## Installation
 
 ```bash
-composer require stuartherbert/typesafe-collections
+composer require stusdevkit/typesafe-collections
 ```
 
 ## Three Types of Collection
@@ -19,7 +21,7 @@ A **List** is a sequential collection with automatic integer keys. The caller pr
 Use a List when your data has no natural identity or primary key.
 
 ```php
-use StuartHerbert\TypesafeCollections\Lists\ListOfStrings;
+use StusDevKit\TypesafeCollections\Lists\ListOfStrings;
 
 $tags = new ListOfStrings();
 $tags->add('php')
@@ -49,7 +51,7 @@ $tags->toArray();    // [0 => 'php', 1 => 'collections', 2 => 'typesafe']
 A **Dictionary** is a key-value collection where the caller provides both the key and the value. Use a Dictionary when your data has an external identity or when you need to control the keys.
 
 ```php
-use StuartHerbert\TypesafeCollections\Dictionaries\DictOfStrings;
+use StusDevKit\TypesafeCollections\Dictionaries\DictOfStrings;
 
 $config = new DictOfStrings();
 $config->set('host', 'localhost')
@@ -80,7 +82,7 @@ An **Index** is a key-value collection where the key is derived from the value i
 Use an Index when your data has an inherent identity that should serve as its lookup key.
 
 ```php
-use StuartHerbert\TypesafeCollections\Indexes\IndexOfEntitiesWithUuids;
+use StusDevKit\TypesafeCollections\Indexes\IndexOfEntitiesWithUuids;
 
 $users = new IndexOfEntitiesWithUuids();
 $users->add($alice);  // key derived from $alice->getId()
@@ -166,7 +168,7 @@ The library provides interfaces for entities that can be stored in Indexes:
 Create your own type-safe collection by extending the appropriate base class:
 
 ```php
-use StuartHerbert\TypesafeCollections\Lists\CollectionAsList;
+use StusDevKit\TypesafeCollections\Lists\CollectionAsList;
 
 /**
  * @extends CollectionAsList<MyValueObject>
@@ -177,7 +179,7 @@ class ListOfMyValueObjects extends CollectionAsList
 ```
 
 ```php
-use StuartHerbert\TypesafeCollections\Dictionaries\CollectionAsDict;
+use StusDevKit\TypesafeCollections\Dictionaries\CollectionAsDict;
 
 /**
  * @extends CollectionAsDict<string, MyEntity>

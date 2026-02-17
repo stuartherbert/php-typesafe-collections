@@ -36,13 +36,13 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Tests\Unit\Dictionaries;
+namespace StusDevKit\TypesafeCollections\Tests\Unit\Dictionaries;
 
 use ArrayIterator;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use StuartHerbert\TypesafeCollections\Dictionaries\DictOfBooleans;
+use StusDevKit\TypesafeCollections\Dictionaries\DictOfBooleans;
 
 #[TestDox('DictOfBooleans')]
 class DictOfBooleansTest extends TestCase

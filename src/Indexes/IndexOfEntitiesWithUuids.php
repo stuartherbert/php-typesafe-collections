@@ -1,5 +1,10 @@
 <?php
 
+// Stu's Dev Kit
+//
+// Building blocks for assembling the things you need to build, in a way
+// that will last.
+//
 // Copyright (c) 2026-present Stuart Herbert
 // All rights reserved.
 //
@@ -34,11 +39,11 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Indexes;
+namespace StusDevKit\TypesafeCollections\Indexes;
 
 use Ramsey\Uuid\UuidInterface;
-use StuartHerbert\TypesafeCollections\Contracts\EntityWithUuid;
-use StuartHerbert\TypesafeCollections\Dictionaries\DictOfObjects;
+use StusDevKit\TypesafeCollections\Contracts\EntityWithUuid;
+use StusDevKit\TypesafeCollections\Dictionaries\DictOfObjects;
 
 /**
  * IndexOfEntitiesWithUuids holds a collection of objects that implement the

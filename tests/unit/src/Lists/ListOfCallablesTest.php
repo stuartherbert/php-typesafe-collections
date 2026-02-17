@@ -36,7 +36,7 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Tests\Unit\Lists;
+namespace StusDevKit\TypesafeCollections\Tests\Unit\Lists;
 
 use ArrayIterator;
 use Closure;
@@ -44,7 +44,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use StuartHerbert\TypesafeCollections\Lists\ListOfCallables;
+use StusDevKit\TypesafeCollections\Lists\ListOfCallables;
 
 #[TestDox('ListOfCallables')]
 class ListOfCallablesTest extends TestCase

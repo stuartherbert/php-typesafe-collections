@@ -36,7 +36,7 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Tests\Unit\Lists;
+namespace StusDevKit\TypesafeCollections\Tests\Unit\Lists;
 
 use ArrayIterator;
 use ArrayObject;
@@ -46,7 +46,7 @@ use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use stdClass;
-use StuartHerbert\TypesafeCollections\Lists\ListOfObjects;
+use StusDevKit\TypesafeCollections\Lists\ListOfObjects;
 
 #[TestDox('ListOfObjects')]
 class ListOfObjectsTest extends TestCase

@@ -1,5 +1,10 @@
 <?php
 
+// Stu's Dev Kit
+//
+// Building blocks for assembling the things you need to build, in a way
+// that will last.
+//
 // Copyright (c) 2026-present Stuart Herbert
 // All rights reserved.
 //
@@ -34,9 +39,9 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Dictionaries;
+namespace StusDevKit\TypesafeCollections\Dictionaries;
 
-use StuartHerbert\TypesafeCollections\Traits\StringTransformations;
+use StusDevKit\TypesafeCollections\Traits\StringTransformations;
 
 /**
  * DictOfStrings holds a collection of strings.

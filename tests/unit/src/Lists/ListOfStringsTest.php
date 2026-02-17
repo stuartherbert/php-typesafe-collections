@@ -36,14 +36,14 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Tests\Unit\Lists;
+namespace StusDevKit\TypesafeCollections\Tests\Unit\Lists;
 
 use ArrayIterator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use StuartHerbert\TypesafeCollections\Lists\ListOfStrings;
+use StusDevKit\TypesafeCollections\Lists\ListOfStrings;
 
 #[TestDox('ListOfStrings')]
 class ListOfStringsTest extends TestCase

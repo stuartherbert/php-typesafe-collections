@@ -1,5 +1,10 @@
 <?php
 
+// Stu's Dev Kit
+//
+// Building blocks for assembling the things you need to build, in a way
+// that will last.
+//
 // Copyright (c) 2026-present Stuart Herbert
 // All rights reserved.
 //
@@ -34,9 +39,9 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Validators;
+namespace StusDevKit\TypesafeCollections\Validators;
 
-use StuartHerbert\TypesafeCollections\Exceptions\NullValueNotAllowedException;
+use StusDevKit\TypesafeCollections\Exceptions\NullValueNotAllowedException;
 
 /**
  * RejectNullValue checks that a single value is not null.

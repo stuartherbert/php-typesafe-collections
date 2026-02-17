@@ -36,14 +36,14 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Tests\Unit;
+namespace StusDevKit\TypesafeCollections\Tests\Unit;
 
 use ArrayIterator;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use StuartHerbert\TypesafeCollections\CollectionOfAnything;
-use StuartHerbert\TypesafeCollections\Exceptions\NullValueNotAllowedException;
+use StusDevKit\TypesafeCollections\CollectionOfAnything;
+use StusDevKit\TypesafeCollections\Exceptions\NullValueNotAllowedException;
 
 #[TestDox('CollectionOfAnything')]
 class CollectionOfAnythingTest extends TestCase

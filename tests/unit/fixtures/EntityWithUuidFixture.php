@@ -36,10 +36,10 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Tests\Fixtures;
+namespace StusDevKit\TypesafeCollections\Tests\Fixtures;
 
 use Ramsey\Uuid\UuidInterface;
-use StuartHerbert\TypesafeCollections\Contracts\EntityWithUuid;
+use StusDevKit\TypesafeCollections\Contracts\EntityWithUuid;
 
 class EntityWithUuidFixture implements EntityWithUuid
 {

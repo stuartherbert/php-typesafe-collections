@@ -1,17 +1,17 @@
 {
-    "name": "stuartherbert/typesafe-collections",
+    "name": "stusdevkit/typesafe-collections",
     "description": "Type-safe collection classes",
     "type": "library",
     "license": "BSD-3-Clause",
     "autoload": {
         "psr-4": {
-            "StuartHerbert\\TypesafeCollections\\": "src/"
+            "StusDevKit\\TypesafeCollections\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "StuartHerbert\\TypesafeCollections\\Tests\\Unit\\": "tests/unit/src",
-            "StuartHerbert\\TypesafeCollections\\Tests\\Fixtures\\": "tests/unit/fixtures"
+            "StusDevKit\\TypesafeCollections\\Tests\\Unit\\": "tests/unit/src",
+            "StusDevKit\\TypesafeCollections\\Tests\\Fixtures\\": "tests/unit/fixtures"
         }
     },
     "authors": [

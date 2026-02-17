@@ -36,7 +36,7 @@
 
 declare(strict_types=1);
 
-namespace StuartHerbert\TypesafeCollections\Tests\Unit\Indexes;
+namespace StusDevKit\TypesafeCollections\Tests\Unit\Indexes;
 
 use ArrayIterator;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -44,8 +44,8 @@ use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use RuntimeException;
-use StuartHerbert\TypesafeCollections\Dictionaries\DictOfObjects;
-use StuartHerbert\TypesafeCollections\Indexes\IndexOfUuids;
+use StusDevKit\TypesafeCollections\Dictionaries\DictOfObjects;
+use StusDevKit\TypesafeCollections\Indexes\IndexOfUuids;
 
 #[TestDox('IndexOfUuids')]
 class IndexOfUuidsTest extends TestCase
