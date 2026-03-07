@@ -39,10 +39,10 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Indexes;
+namespace StusDevKit\CollectionsKit\Indexes;
 
 use Ramsey\Uuid\UuidInterface;
-use StusDevKit\TypesafeCollections\Dictionaries\DictOfObjects;
+use StusDevKit\CollectionsKit\Dictionaries\DictOfObjects;
 
 /**
  * IndexOfUuids holds a collection of UuidInterface objects,

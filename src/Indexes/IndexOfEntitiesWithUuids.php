@@ -39,11 +39,11 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Indexes;
+namespace StusDevKit\CollectionsKit\Indexes;
 
 use Ramsey\Uuid\UuidInterface;
-use StusDevKit\TypesafeCollections\Contracts\EntityWithUuid;
-use StusDevKit\TypesafeCollections\Dictionaries\DictOfObjects;
+use StusDevKit\CollectionsKit\Contracts\EntityWithUuid;
+use StusDevKit\CollectionsKit\Dictionaries\DictOfObjects;
 
 /**
  * IndexOfEntitiesWithUuids holds a collection of objects that implement the

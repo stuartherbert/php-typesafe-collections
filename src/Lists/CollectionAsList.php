@@ -39,10 +39,10 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Lists;
+namespace StusDevKit\CollectionsKit\Lists;
 
-use StusDevKit\TypesafeCollections\CollectionOfAnything;
-use StusDevKit\TypesafeCollections\Validators\RejectNullValue;
+use StusDevKit\CollectionsKit\CollectionOfAnything;
+use StusDevKit\CollectionsKit\Validators\RejectNullValue;
 
 /**
  * CollectionAsList holds a collection of data as an array with sequential

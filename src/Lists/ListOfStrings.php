@@ -39,9 +39,9 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Lists;
+namespace StusDevKit\CollectionsKit\Lists;
 
-use StusDevKit\TypesafeCollections\Traits\StringTransformations;
+use StusDevKit\CollectionsKit\Traits\StringTransformations;
 
 /**
  * ListOfStrings holds a list of strings.

@@ -39,7 +39,7 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Dictionaries;
+namespace StusDevKit\CollectionsKit\Dictionaries;
 
 use Ramsey\Uuid\UuidInterface;
 

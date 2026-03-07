@@ -36,7 +36,7 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Tests\Unit\Dictionaries;
+namespace StusDevKit\CollectionsKit\Tests\Unit\Dictionaries;
 
 use ArrayIterator;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -44,8 +44,8 @@ use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use RuntimeException;
-use StusDevKit\TypesafeCollections\Dictionaries\DictOfObjects;
-use StusDevKit\TypesafeCollections\Dictionaries\DictOfUuids;
+use StusDevKit\CollectionsKit\Dictionaries\DictOfObjects;
+use StusDevKit\CollectionsKit\Dictionaries\DictOfUuids;
 
 #[TestDox('DictOfUuids')]
 class DictOfUuidsTest extends TestCase

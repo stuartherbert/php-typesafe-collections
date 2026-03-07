@@ -1,18 +1,37 @@
-# typesafe-collections
+# CollectionsKit for Stu's Dev Kit
 
-Type-safe data collection classes for PHP 8.5+, with full PHPStan level 10 support.
+Type-safe data collection classes for PHP 8.5+, with full PHPStan max-level support.
 
 Part of Stu's Dev Kit: building blocks for assembling the things you need to build, in a way that will last.
 
 ## Installation
 
 ```bash
-composer require stusdevkit/typesafe-collections
+composer require stusdevkit/collectionskit
 ```
 
-## Three Types of Collection
+## What Problem Are We Solving?
 
-This library provides three types of collection, each suited to a different relationship between keys and values.
+PHP's arrays are one of the language's secret weapons:
+
+- they're incredibly fast
+- they're do the work of several data structures from most other languages
+
+Unfortunately, if you're trying to build code that will last for years, they have two major disadvantages:
+
+- they can't be typed at all
+- they can't be extended (ie, can't add additional methods)
+
+To a fair extent, you _can_ get around the first one by using PHPStan. But that only gives you limited protection: there are no runtime type checks to catch mistakes.
+
+The second one is more about developer experience preference.
+
+- With a collections class, we can colocate all the relevant, repeated operations throughout our code, and add them as methods. They're easy to discover, and gaps are easy to spot.
+- We can also pick a type of collection (dictionary, list, index) that puts restrictions on how that collection works. This can add convenience (see index collections), and also avoid bugs by making sure the collection is used consistently throughout your libraries and apps.
+
+## Types of Collection
+
+This library provides the following types of collection, each suited to a different relationship between keys and values.
 
 ### Lists
 
@@ -21,7 +40,7 @@ A **List** is a sequential collection with automatic integer keys. The caller pr
 Use a List when your data has no natural identity or primary key.
 
 ```php
-use StusDevKit\TypesafeCollections\Lists\ListOfStrings;
+use StusDevKit\CollectionsKit\Lists\ListOfStrings;
 
 $tags = new ListOfStrings();
 $tags->add('php')
@@ -51,7 +70,7 @@ $tags->toArray();    // [0 => 'php', 1 => 'collections', 2 => 'typesafe']
 A **Dictionary** is a key-value collection where the caller provides both the key and the value. Use a Dictionary when your data has an external identity or when you need to control the keys.
 
 ```php
-use StusDevKit\TypesafeCollections\Dictionaries\DictOfStrings;
+use StusDevKit\CollectionsKit\Dictionaries\DictOfStrings;
 
 $config = new DictOfStrings();
 $config->set('host', 'localhost')
@@ -82,7 +101,7 @@ An **Index** is a key-value collection where the key is derived from the value i
 Use an Index when your data has an inherent identity that should serve as its lookup key.
 
 ```php
-use StusDevKit\TypesafeCollections\Indexes\IndexOfEntitiesWithUuids;
+use StusDevKit\CollectionsKit\Indexes\IndexOfEntitiesWithUuids;
 
 $users = new IndexOfEntitiesWithUuids();
 $users->add($alice);  // key derived from $alice->getId()
@@ -168,7 +187,7 @@ The library provides interfaces for entities that can be stored in Indexes:
 Create your own type-safe collection by extending the appropriate base class:
 
 ```php
-use StusDevKit\TypesafeCollections\Lists\CollectionAsList;
+use StusDevKit\CollectionsKit\Lists\CollectionAsList;
 
 /**
  * @extends CollectionAsList<MyValueObject>
@@ -179,7 +198,7 @@ class ListOfMyValueObjects extends CollectionAsList
 ```
 
 ```php
-use StusDevKit\TypesafeCollections\Dictionaries\CollectionAsDict;
+use StusDevKit\CollectionsKit\Dictionaries\CollectionAsDict;
 
 /**
  * @extends CollectionAsDict<string, MyEntity>

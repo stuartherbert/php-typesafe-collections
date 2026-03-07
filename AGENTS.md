@@ -2,35 +2,53 @@
 
 ## Project Overview
 
-This is the type-safe data collections library for PHP. It handles two types of collections:
+This is the type-safe data collections library for PHP. It provides implementations for the following types of collections:
 - Lists (data that has no obvious identity/primary key)
-- Sets (data that has a given identity/primary key)
+- Dictionaries (data that has a given identity/primary key)
+- Indexes (dictionaries where the stored data can provide its own identity)
 
 ## Architecture & Structure
 
 ### Namespace Structure
-- Root namespace: `StusDevKit\TypesafeCollections`
-- Test namespace: `StusDevKit\TypesafeCollections\Tests\Unit`
+- Root namespace: `StusDevKit\CollectionsKit`
+- Test namespace: `StusDevKit\CollectionsKit\Tests\Unit`
+- Test fixtures namespace: `StusDevKit\CollectionsKit\Tests\Fixtures`
 - Tests mirror src directory structure under `tests/unit/src/`
 
 ### Directory Organization
 - `src/` - Root source directory
 - `src/Contracts/` - Interfaces and contracts
+- `src/Dictionaries/` - Collections that have a given identity / primary key
 - `src/Exceptions/` - Exceptions thrown by this code library
+- `src/Indexes/` - Collections where the stored data provides its own identity
 - `src/Lists/` - Collections that have no obvious identity / primary key
-- `src/Sets/` - Collections that have a given identity / primary key
+- `src/Traits/` - Code that's shared across multiple classes
+- `src/Validators/` - Validation helpers used by collection classes
+- `tests/fixtures/src/` - test fixtures
 - `tests/unit/src/` - PHPUnit unit tests (mirrors src/ structure)
 
 ### Class Hierarchy
 ```
 CollectionOfAnything (base class - src/CollectionOfAnything.php)
-├── CollectionAsList (for Lists - src/Lists/)
-│   └── ListOfStrings
-└── CollectionAsSet (for Sets - src/Sets/)
-    ├── SetOfStrings
-    ├── SetOfBooleans
-    └── SetOfObjects
-        └── SetOfUuids
+├── CollectionAsList (src/Lists/)
+│   ├── ListOfCallables
+│   ├── ListOfNumbers
+│   │   ├── ListOfFloats
+│   │   └── ListOfIntegers
+│   ├── ListOfObjects
+│   ├── ListOfStrings
+│   └── ListOfUuids
+└── CollectionAsDict (src/Dictionaries/)
+    ├── DictOfBooleans
+    ├── DictOfNumbers
+    │   ├── DictOfFloats
+    │   └── DictOfIntegers
+    ├── DictOfObjects
+    │   ├── DictOfUuids
+    │   ├── IndexOfEntitiesWithStringIds (src/Indexes/)
+    │   ├── IndexOfEntitiesWithUuids (src/Indexes/)
+    │   └── IndexOfUuids (src/Indexes/)
+    └── DictOfStrings
 ```
 
 ## Working Practices
@@ -122,8 +140,9 @@ Xdebug.
 ### Quality Commands
 - **Code formatting**: `make cs-fix`
 - **Syntax checking**: `make syntax-check`
-- **Static analysis**: `make phpstan` (level 9)
-- **All linting**: `make lint` (runs syntax-check, cs-fix, phpstan)
+- **Static analysis**: `make phpstan` (level 10)
+- **All linting**: `make static-checks` (runs syntax-check, cs-fix, phpstan)
+- **All tests**: `make all-checks`
 
 ### Test Commands
 - **Full test suite**: `make test`
@@ -135,32 +154,6 @@ Xdebug.
 
 ## Dependencies & External Systems
 - **PHPUnit 12.5** - testing framework
-- **PHPStan** - static analysis at level 9 (strictest)
+- **PHPStan** - static analysis at level 10 (strictest)
 - **Laminas Coding Standard** - code style enforcement
 - **Ramsey UUID** - for UUID v7 generation
-
-## Landing the Plane (Session Completion)
-
-**When ending a work session**, you MUST complete ALL steps below. Work is NOT complete until `git push` succeeds.
-
-**MANDATORY WORKFLOW:**
-
-1. **File issues for remaining work** - Create issues for anything that needs follow-up
-2. **Run quality gates** (if code changed) - Tests, linters, builds
-3. **Update issue status** - Close finished work, update in-progress items
-4. **PUSH TO REMOTE** - This is MANDATORY:
-   ```bash
-   git pull --rebase
-   bd sync
-   git push
-   git status  # MUST show "up to date with origin"
-   ```
-5. **Clean up** - Clear stashes, prune remote branches
-6. **Verify** - All changes committed AND pushed
-7. **Hand off** - Provide context for next session
-
-**CRITICAL RULES:**
-- Work is NOT complete until `git push` succeeds
-- NEVER stop before pushing - that leaves work stranded locally
-- NEVER say "ready to push when you are" - YOU must push
-- If push fails, resolve and retry until it succeeds

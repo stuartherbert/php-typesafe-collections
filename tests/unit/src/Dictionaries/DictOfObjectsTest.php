@@ -36,7 +36,7 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Tests\Unit\Dictionaries;
+namespace StusDevKit\CollectionsKit\Tests\Unit\Dictionaries;
 
 use ArrayIterator;
 use ArrayObject;
@@ -45,8 +45,8 @@ use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use stdClass;
-use StusDevKit\TypesafeCollections\Dictionaries\CollectionAsDict;
-use StusDevKit\TypesafeCollections\Dictionaries\DictOfObjects;
+use StusDevKit\CollectionsKit\Dictionaries\CollectionAsDict;
+use StusDevKit\CollectionsKit\Dictionaries\DictOfObjects;
 
 #[TestDox('DictOfObjects')]
 class DictOfObjectsTest extends TestCase

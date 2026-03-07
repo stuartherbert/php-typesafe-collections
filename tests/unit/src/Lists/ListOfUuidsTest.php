@@ -36,7 +36,7 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Tests\Unit\Lists;
+namespace StusDevKit\CollectionsKit\Tests\Unit\Lists;
 
 use ArrayIterator;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -44,7 +44,7 @@ use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use RuntimeException;
-use StusDevKit\TypesafeCollections\Lists\ListOfUuids;
+use StusDevKit\CollectionsKit\Lists\ListOfUuids;
 
 #[TestDox('ListOfUuids')]
 class ListOfUuidsTest extends TestCase

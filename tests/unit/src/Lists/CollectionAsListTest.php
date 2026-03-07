@@ -36,14 +36,14 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Tests\Unit\Lists;
+namespace StusDevKit\CollectionsKit\Tests\Unit\Lists;
 
 use ArrayIterator;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use StusDevKit\TypesafeCollections\Exceptions\NullValueNotAllowedException;
-use StusDevKit\TypesafeCollections\Lists\CollectionAsList;
+use StusDevKit\CollectionsKit\Exceptions\NullValueNotAllowedException;
+use StusDevKit\CollectionsKit\Lists\CollectionAsList;
 
 #[TestDox('CollectionAsList')]
 class CollectionAsListTest extends TestCase

@@ -39,10 +39,10 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Indexes;
+namespace StusDevKit\CollectionsKit\Indexes;
 
-use StusDevKit\TypesafeCollections\Contracts\EntityWithStringId;
-use StusDevKit\TypesafeCollections\Dictionaries\DictOfObjects;
+use StusDevKit\CollectionsKit\Contracts\EntityWithStringId;
+use StusDevKit\CollectionsKit\Dictionaries\DictOfObjects;
 
 /**
  * IndexOfEntitiesWithStringId holds a collection of objects that implement

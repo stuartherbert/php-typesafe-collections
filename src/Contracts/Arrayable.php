@@ -39,7 +39,7 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Contracts;
+namespace StusDevKit\CollectionsKit\Contracts;
 
 /**
  * Any class that implements Arrayable can return its internal state

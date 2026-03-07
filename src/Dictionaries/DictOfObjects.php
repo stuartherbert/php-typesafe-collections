@@ -39,7 +39,7 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Dictionaries;
+namespace StusDevKit\CollectionsKit\Dictionaries;
 
 /**
  * DictOfObjects holds a collection of objects that have identity (ie, they

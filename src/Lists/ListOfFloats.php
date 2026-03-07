@@ -39,7 +39,7 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Lists;
+namespace StusDevKit\CollectionsKit\Lists;
 
 /**
  * ListOfFloats holds a list of float values.

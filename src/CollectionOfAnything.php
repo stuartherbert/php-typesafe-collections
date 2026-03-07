@@ -39,17 +39,17 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections;
+namespace StusDevKit\CollectionsKit;
 
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 use RuntimeException;
-use StusDevKit\TypesafeCollections\Contracts\Arrayable;
-use StusDevKit\TypesafeCollections\Validators\RejectNullArrayValues;
+use StusDevKit\CollectionsKit\Contracts\Arrayable;
+use StusDevKit\CollectionsKit\Validators\RejectNullArrayValues;
 
 /**
- * CollectionOfAnything is the base class for all typesafe collections.
+ * CollectionOfAnything is the base class for all CollectionsKit collections.
  *
  * Most of the time, you should not extend this class directly. Extend
  * CollectionAsList, CollectionAsDict, or one of their child classes.

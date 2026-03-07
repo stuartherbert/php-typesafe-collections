@@ -39,7 +39,7 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Dictionaries;
+namespace StusDevKit\CollectionsKit\Dictionaries;
 
 /**
  * DictOfBooleans holds a collection of named true|false flags.

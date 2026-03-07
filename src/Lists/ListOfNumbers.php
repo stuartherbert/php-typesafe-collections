@@ -39,7 +39,7 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Lists;
+namespace StusDevKit\CollectionsKit\Lists;
 
 /**
  * ListOfNumbers holds a list of numeric values (int or float).

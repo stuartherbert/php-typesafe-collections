@@ -1,17 +1,17 @@
 {
-    "name": "stusdevkit/typesafe-collections",
-    "description": "Type-safe collection classes",
+    "name": "stusdevkit/collectionskit",
+    "description": "Type-safe collection, list and index classes",
     "type": "library",
     "license": "BSD-3-Clause",
     "autoload": {
         "psr-4": {
-            "StusDevKit\\TypesafeCollections\\": "src/"
+            "StusDevKit\\CollectionsKit\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "StusDevKit\\TypesafeCollections\\Tests\\Unit\\": "tests/unit/src",
-            "StusDevKit\\TypesafeCollections\\Tests\\Fixtures\\": "tests/unit/fixtures"
+            "StusDevKit\\CollectionsKit\\Tests\\Unit\\": "tests/unit/src",
+            "StusDevKit\\CollectionsKit\\Tests\\Fixtures\\": "tests/fixtures/src"
         }
     },
     "authors": [

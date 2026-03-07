@@ -39,11 +39,11 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Dictionaries;
+namespace StusDevKit\CollectionsKit\Dictionaries;
 
 use RuntimeException;
-use StusDevKit\TypesafeCollections\CollectionOfAnything;
-use StusDevKit\TypesafeCollections\Validators\RejectNullValue;
+use StusDevKit\CollectionsKit\CollectionOfAnything;
+use StusDevKit\CollectionsKit\Validators\RejectNullValue;
 
 /**
  * CollectionAsDict holds a collection of data that has identity (ie, it has

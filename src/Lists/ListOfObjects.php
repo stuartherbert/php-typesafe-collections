@@ -39,7 +39,7 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Lists;
+namespace StusDevKit\CollectionsKit\Lists;
 
 /**
  * ListOfObjects holds a list of PHP objects.

@@ -36,14 +36,14 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Tests\Unit\Dictionaries;
+namespace StusDevKit\CollectionsKit\Tests\Unit\Dictionaries;
 
 use ArrayIterator;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use StusDevKit\TypesafeCollections\Dictionaries\CollectionAsDict;
-use StusDevKit\TypesafeCollections\Exceptions\NullValueNotAllowedException;
+use StusDevKit\CollectionsKit\Dictionaries\CollectionAsDict;
+use StusDevKit\CollectionsKit\Exceptions\NullValueNotAllowedException;
 
 #[TestDox('CollectionAsDict')]
 class CollectionAsDictTest extends TestCase

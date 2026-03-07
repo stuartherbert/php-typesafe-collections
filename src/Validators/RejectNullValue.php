@@ -39,9 +39,9 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Validators;
+namespace StusDevKit\CollectionsKit\Validators;
 
-use StusDevKit\TypesafeCollections\Exceptions\NullValueNotAllowedException;
+use StusDevKit\CollectionsKit\Exceptions\NullValueNotAllowedException;
 
 /**
  * RejectNullValue checks that a single value is not null.

@@ -39,7 +39,7 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Exceptions;
+namespace StusDevKit\CollectionsKit\Exceptions;
 
 use Exception;
 use Throwable;

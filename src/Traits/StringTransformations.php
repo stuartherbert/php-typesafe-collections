@@ -39,7 +39,7 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Traits;
+namespace StusDevKit\CollectionsKit\Traits;
 
 /**
  * StringTransformations provides in-place string transformation

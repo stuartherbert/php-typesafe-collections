@@ -36,12 +36,12 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Tests\Unit\Exceptions;
+namespace StusDevKit\CollectionsKit\Tests\Unit\Exceptions;
 
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
-use StusDevKit\TypesafeCollections\Exceptions\NullValueNotAllowedException;
-use StusDevKit\TypesafeCollections\Exceptions\Rfc9457ProblemDetailsException;
+use StusDevKit\CollectionsKit\Exceptions\NullValueNotAllowedException;
+use StusDevKit\CollectionsKit\Exceptions\Rfc9457ProblemDetailsException;
 
 #[TestDox('NullValueNotAllowed')]
 class NullValueNotAllowedTest extends TestCase

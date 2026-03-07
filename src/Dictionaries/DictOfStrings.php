@@ -39,9 +39,9 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Dictionaries;
+namespace StusDevKit\CollectionsKit\Dictionaries;
 
-use StusDevKit\TypesafeCollections\Traits\StringTransformations;
+use StusDevKit\CollectionsKit\Traits\StringTransformations;
 
 /**
  * DictOfStrings holds a collection of strings.

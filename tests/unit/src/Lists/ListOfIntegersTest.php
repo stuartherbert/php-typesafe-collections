@@ -36,15 +36,15 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Tests\Unit\Lists;
+namespace StusDevKit\CollectionsKit\Tests\Unit\Lists;
 
 use ArrayIterator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use StusDevKit\TypesafeCollections\Lists\ListOfIntegers;
-use StusDevKit\TypesafeCollections\Lists\ListOfNumbers;
+use StusDevKit\CollectionsKit\Lists\ListOfIntegers;
+use StusDevKit\CollectionsKit\Lists\ListOfNumbers;
 
 #[TestDox('ListOfIntegers')]
 class ListOfIntegersTest extends TestCase

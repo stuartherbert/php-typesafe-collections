@@ -36,15 +36,15 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Tests\Unit\Indexes;
+namespace StusDevKit\CollectionsKit\Tests\Unit\Indexes;
 
 use ArrayIterator;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use StusDevKit\TypesafeCollections\Dictionaries\DictOfObjects;
-use StusDevKit\TypesafeCollections\Indexes\IndexOfEntitiesWithStringIds;
-use StusDevKit\TypesafeCollections\Tests\Fixtures\EntityWithStringIdFixture;
+use StusDevKit\CollectionsKit\Dictionaries\DictOfObjects;
+use StusDevKit\CollectionsKit\Indexes\IndexOfEntitiesWithStringIds;
+use StusDevKit\CollectionsKit\Tests\Fixtures\EntityWithStringIdFixture;
 
 #[TestDox('IndexOfEntitiesWithStringIds')]
 class IndexOfEntitiesWithStringIdsTest extends TestCase

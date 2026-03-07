@@ -36,7 +36,7 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Tests\Unit\Indexes;
+namespace StusDevKit\CollectionsKit\Tests\Unit\Indexes;
 
 use ArrayIterator;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -44,9 +44,9 @@ use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use RuntimeException;
-use StusDevKit\TypesafeCollections\Dictionaries\DictOfObjects;
-use StusDevKit\TypesafeCollections\Indexes\IndexOfEntitiesWithUuids;
-use StusDevKit\TypesafeCollections\Tests\Fixtures\EntityWithUuidFixture;
+use StusDevKit\CollectionsKit\Dictionaries\DictOfObjects;
+use StusDevKit\CollectionsKit\Indexes\IndexOfEntitiesWithUuids;
+use StusDevKit\CollectionsKit\Tests\Fixtures\EntityWithUuidFixture;
 
 #[TestDox('IndexOfEntitiesWithUuids')]
 class IndexOfEntitiesWithUuidsTest extends TestCase

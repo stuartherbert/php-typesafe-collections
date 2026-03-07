@@ -36,13 +36,13 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\TypesafeCollections\Tests\Unit\Validators;
+namespace StusDevKit\CollectionsKit\Tests\Unit\Validators;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
-use StusDevKit\TypesafeCollections\Exceptions\NullValueNotAllowedException;
-use StusDevKit\TypesafeCollections\Validators\RejectNullValue;
+use StusDevKit\CollectionsKit\Exceptions\NullValueNotAllowedException;
+use StusDevKit\CollectionsKit\Validators\RejectNullValue;
 use stdClass;
 
 #[TestDox('RejectNullValue')]
