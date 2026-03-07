@@ -1,6 +1,11 @@
 <?php
 
 //
+// Stu's Dev Kit
+//
+// Building blocks for assembling the things you need to build, in a way
+// that will last.
+//
 // Copyright (c) 2026-present Stuart Herbert
 // All rights reserved.
 //

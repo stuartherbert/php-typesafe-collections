@@ -62,7 +62,7 @@ class CollectionAsList extends CollectionOfAnything
 {
     // ================================================================
     //
-    // Data management
+    // Data Management
     //
     // ----------------------------------------------------------------
 

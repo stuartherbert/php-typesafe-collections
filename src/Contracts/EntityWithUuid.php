@@ -43,6 +43,15 @@ namespace StusDevKit\CollectionsKit\Contracts;
 
 use Ramsey\Uuid\UuidInterface;
 
+/**
+ * `EntityWithUuidId` describes a class:
+ *
+ * - that has an primary key (aka an identity)
+ * - where the identity is a UUID
+ *
+ * Originally added to support collections of database results
+ * where the primary key is a UUID.
+ */
 interface EntityWithUuid
 {
     public function getId(): UuidInterface;

@@ -43,6 +43,7 @@ namespace StusDevKit\CollectionsKit\Indexes;
 
 use Ramsey\Uuid\UuidInterface;
 use StusDevKit\CollectionsKit\Dictionaries\DictOfObjects;
+use StusDevKit\CollectionsKit\Traits\UuidConversions;
 
 /**
  * IndexOfUuids holds a collection of UuidInterface objects,
@@ -56,26 +57,16 @@ use StusDevKit\CollectionsKit\Dictionaries\DictOfObjects;
  */
 class IndexOfUuids extends DictOfObjects
 {
+    use UuidConversions;
+
+    /**
+     * Store a UUID in this collection.
+     *
+     * @param UuidInterface $input - the UUID to store
+     */
     public function add(UuidInterface $input): static
     {
         $this->data[(string) $input] = $input;
         return $this;
-    }
-
-    // ================================================================
-    //
-    // Extractors
-    //
-    // ----------------------------------------------------------------
-
-    /**
-     * @return array<string,string>
-     */
-    public function toArrayOfStrings(): array
-    {
-        return array_map(
-            fn(UuidInterface $id) => (string) $id,
-            $this->data,
-        );
     }
 }

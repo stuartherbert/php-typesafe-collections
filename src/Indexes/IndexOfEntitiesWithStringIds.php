@@ -53,6 +53,14 @@ use StusDevKit\CollectionsKit\Dictionaries\DictOfObjects;
  */
 class IndexOfEntitiesWithStringIds extends DictOfObjects
 {
+    /**
+     * Store an entity in this collection.
+     *
+     * If there's an existing entry for this entity, the existing entry
+     * will be overwritten with the given `$input`.
+     *
+     * @param EntityWithStringId $input - the entity to store
+     */
     public function add(EntityWithStringId $input): static
     {
         $this->data[(string) $input->getId()] = $input;

@@ -42,35 +42,33 @@ declare(strict_types=1);
 namespace StusDevKit\CollectionsKit\Dictionaries;
 
 use Ramsey\Uuid\UuidInterface;
+use StusDevKit\CollectionsKit\Traits\UuidConversions;
 
 /**
  * DictOfUuids holds a collection of UuidInterface objects, using the
  * Uuid (as a string) as the identity (ie, the array key).
  *
+ * Most of the time, you probably want the more user-friendly
+ * `IndexOfUuids` instead.
+ *
  * @extends DictOfObjects<string, UuidInterface>
  */
 class DictOfUuids extends DictOfObjects
 {
+    use UuidConversions;
+
+    /**
+     * Add a UUID to the dictionary.
+     *
+     * If there's an existing entry for `$key`, this will be overwritten
+     * with the given `$input`.
+     *
+     * @param string $key - name/ID to associate $input with
+     * @param UuidInterface $input - the UUID to store
+     */
     public function add(string $key, UuidInterface $input): static
     {
         $this->data[$key] = $input;
         return $this;
-    }
-
-    // ================================================================
-    //
-    // Extractors
-    //
-    // ----------------------------------------------------------------
-
-    /**
-     * @return array<string,string>
-     */
-    public function toArrayOfStrings(): array
-    {
-        return array_map(
-            fn(UuidInterface $id) => (string) $id,
-            $this->data,
-        );
     }
 }

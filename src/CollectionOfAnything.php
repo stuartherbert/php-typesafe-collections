@@ -123,7 +123,7 @@ class CollectionOfAnything implements Arrayable, Countable, IteratorAggregate
 
     // ================================================================
     //
-    // Data management
+    // Data Management
     //
     // ----------------------------------------------------------------
 

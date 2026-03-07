@@ -39,20 +39,37 @@
 
 declare(strict_types=1);
 
-namespace StusDevKit\CollectionsKit\Contracts;
+namespace StusDevKit\CollectionsKit\Traits;
 
-use Stringable;
+use Ramsey\Uuid\UuidInterface;
 
 /**
- * `EntityWithStringId` describes a class:
+ * UuidConversions provides UUID-to-string conversion
+ * methods for collections that hold UuidInterface values.
  *
- * - that has an primary key (aka an identity)
- * - where the identity is a string
- *
- * Originally added to support collections of database results
- * where the primary key is a string.
+ * Use this trait in any collection class that extends
+ * CollectionOfAnything and stores UuidInterface objects
+ * keyed by their string representation.
  */
-interface EntityWithStringId
+trait UuidConversions
 {
-    public function getId(): string|Stringable;
+    // ================================================================
+    //
+    // Extractors
+    //
+    // ----------------------------------------------------------------
+
+    /**
+     * Returns the collection's UUIDs as an array of strings,
+     * preserving the original array keys.
+     *
+     * @return array<string,string>
+     */
+    public function toArrayOfStrings(): array
+    {
+        return array_map(
+            fn(UuidInterface $id) => (string) $id,
+            $this->data,
+        );
+    }
 }
