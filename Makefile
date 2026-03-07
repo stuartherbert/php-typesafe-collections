@@ -32,7 +32,10 @@ claudecodekit: ## Link in Claude Code agents, skills, and hooks
 	@$(LINK_CCK_AGENT) $(CLAUDECODEKIT)/claude/php/agents/php-syntax-checker.md
 	@$(LINK_CCK_AGENT) $(CLAUDECODEKIT)/claude/php/agents/php-unit-tests.md
 	@$(LINK_CCK_HOOK) $(CLAUDECODEKIT)/claude/hooks/php-syntax-check.sh
+	@$(LINK_CCK_SKILL) $(CLAUDECODEKIT)/claude/skills/opensource-review
 	@$(LINK_CCK_SKILL) $(CLAUDECODEKIT)/claude/skills/review-against
+	@$(LINK_CCK_SKILL) $(CLAUDECODEKIT)/claude/skills/review-branch
+	@$(LINK_CCK_SKILL) $(CLAUDECODEKIT)/claude/skills/review-release
 
 docker-rebuild: ## Rebuild Docker dev environment
 	docker compose build --pull
